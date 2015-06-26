@@ -2,3 +2,5 @@ Biblio/Docs
 Models/TransportationEquilibrium/.*
 Models/TransportationEquilibrium/bin
 
+.DS_Store
+
