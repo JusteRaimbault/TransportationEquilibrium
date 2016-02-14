@@ -1,0 +1,55 @@
+library(shiny)
+library(leaflet)
+
+# Choices for drop-downs
+clustervars <- c(
+  "Cluster employes"="employes",
+  "Entreprises"="entreprises"
+)
+
+# evars <- c(
+#   "Entreprise employes"="Employes",
+#   "Entreprises"="Entreprises",
+# )
+
+shinyUI(navbarPage("Clusters", id="nav",
+
+  tabPanel("Interactive map",
+    div(class="outer",
+
+      tags$head(
+        # Include our custom CSS
+        includeCSS("styles.css"),
+        includeScript("gomap.js")
+      ),
+
+      leafletOutput("map", width="100%", height="100%"),
+
+      # Shiny versions prior to 0.11 should use class="modal" instead.
+      absolutePanel(id = "controls", class = "panel panel-default", fixed = TRUE,
+         draggable = TRUE, top = 60, left = "auto", right = 20, bottom = "auto",
+         width = 330, height = "auto",
+# 
+         h2("Company Clusters"),
+# 
+        # color only activity
+         #selectInput("color", "Color", vars),  
+         selectInput("clustersize", "Cluster Size", clustervars, selected = "Employes")#,
+         #selectInput("esize", "Entreprise Size", clustervars, selected = "Employes"),
+#         conditionalPanel("input.color == 'superzip' || input.size == 'superzip'",
+#           # Only prompt for threshold when coloring or sizing by superzip
+#           numericInput("threshold", "SuperZIP threshold (top n percentile)", 5)
+#         ),
+# 
+#         plotOutput("histCentile", height = 200),
+#         plotOutput("scatterCollegeIncome", height = 250)
+       )#,
+# 
+#       tags$div(id="cite",
+#         'Data compiled for ', tags$em('Coming Apart: The State of White America, 1960–2010'), ' by Charles Murray (Crown Forum, 2012).'
+#       )
+    )
+  ),
+
+  conditionalPanel("false", icon("crosshair"))
+))
