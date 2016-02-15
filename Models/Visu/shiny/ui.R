@@ -1,18 +1,11 @@
 library(shiny)
 library(leaflet)
 
-# Choices for drop-downs
-clustervars <- c(
-  "Cluster employes"="employes",
-  "Entreprises"="entreprises"
-)
 
-# evars <- c(
-#   "Entreprise employes"="Employes",
-#   "Entreprises"="Entreprises",
-# )
+vars=c("congestion","traveltime")
 
-shinyUI(navbarPage("Clusters", id="nav",
+
+shinyUI(navbarPage("Traffic", id="nav",
 
   tabPanel("Interactive map",
     div(class="outer",
@@ -30,11 +23,14 @@ shinyUI(navbarPage("Clusters", id="nav",
          draggable = TRUE, top = 60, left = "auto", right = 20, bottom = "auto",
          width = 330, height = "auto",
 # 
-         h2("Company Clusters"),
+         #h2("Date"),
 # 
+        
+        sliderInput(inputId = "time","Time",min = min(data$ts),max=max(data$ts),value=min(data$ts),step=NULL),
+         selectInput("var", "Variable", vars)
         # color only activity
          #selectInput("color", "Color", vars),  
-         selectInput("clustersize", "Cluster Size", clustervars, selected = "Employes")#,
+         #selectInput("clustersize", "Cluster Size", clustervars, selected = "Employes")#,
          #selectInput("esize", "Entreprise Size", clustervars, selected = "Employes"),
 #         conditionalPanel("input.color == 'superzip' || input.size == 'superzip'",
 #           # Only prompt for threshold when coloring or sizing by superzip

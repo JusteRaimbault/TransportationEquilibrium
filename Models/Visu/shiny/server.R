@@ -25,7 +25,7 @@ shinyServer(function(input, output, session) {
         urlTemplate = "//{s}.tiles.mapbox.com/v3/jcheng.map-5ebohr46/{z}/{x}/{y}.png",
         attribution = 'Maps by <a href="http://www.mapbox.com/">Mapbox</a>'
       ) %>%
-      setView(lng = 1.5, lat = 46, zoom = 6)
+      setView(lng = 2.5, lat = 48.5, zoom = 10)
   })
 
   # A reactive expression that returns the set of zips that are
@@ -42,14 +42,14 @@ shinyServer(function(input, output, session) {
 #         Long >= lngRng[1] & Long <= lngRng[2])
 #   })
  
-   isClusterLevel<-reactive({
-     if (is.null(input$map_bounds)){return(TRUE)}
-     bounds <- input$map_bounds
-     boundsall = bbox(france)
-     if((bounds$north-bounds$south)<((boundsall[2,2]-boundsall[2,1])*changeLevelFactor)){
-       return(FALSE)
-     }else{return(TRUE)}
-   })
+#    isClusterLevel<-reactive({
+#      if (is.null(input$map_bounds)){return(TRUE)}
+#      bounds <- input$map_bounds
+#      boundsall = bbox(france)
+#      if((bounds$north-bounds$south)<((boundsall[2,2]-boundsall[2,1])*changeLevelFactor)){
+#        return(FALSE)
+#      }else{return(TRUE)}
+#    })
 
 
 
@@ -58,42 +58,60 @@ shinyServer(function(input, output, session) {
   # according to the variables the user has chosen to map to color and size.
   observe({
     
-    sizeBy <- input$clustersize
-    show(paste0('cluster size by ',sizeBy))
+    #sizeBy <- input$clustersize
+    #show(paste0('cluster size by ',sizeBy))
     
-    clusterlevel = isClusterLevel()
-    show(paste0('cluster level : ',clusterlevel))
+    #clusterlevel = isClusterLevel()
+    #show(paste0('cluster level : ',clusterlevel))
     
     #show(clusterstable)
     
-    if(clusterlevel==TRUE){
-      clusterColorData <- clusterstable[["activity"]]
-      pal <- colorFactor("Spectral", as.factor(clusterColorData))
+#     if(clusterlevel==TRUE){
+#       clusterColorData <- clusterstable[["activity"]]
+#       pal <- colorFactor("Spectral", as.factor(clusterColorData))
+#       
+#       clusterradius <- clusterstable[[sizeBy]] / max(clusterstable[[sizeBy]]) * 50000
+#       #show(clusterradius)
+#       #show(clusterstable$long)
+#       #show(clusterstable$lat)
+#       leafletProxy("map", data = clusterstable) %>%
+#         clearShapes() %>%
+#         addCircles(~long, ~lat, radius=clusterradius, layerId=~id,
+#           stroke=FALSE, fillOpacity=0.4, fillColor=pal(clusterColorData)) %>%
+#         addLegend("bottomleft", pal=pal, values=clusterColorData, title="Activity",
+#           layerId="colorLegend")
+#     }else{
+      #radius <- commontable$iscluster * (commontable[[sizeBy]]/ max(clusterstable[[sizeBy]]) * 30000) +
+      #   (1-commontable$iscluster )* (commontable$employes / max(commontable$employes) * 50000 )
+      #colorData<-commontable$activity
+    
+     
+     # get time
+      rtimes = abs(times-input$time)
+      #rtimes = abs(times-min(times))
+      time = times[which(rtimes==min(rtimes))]
+    
+      currentData = data[data$ts==time,]
+      tps = sapply(currentData$tps,function(x){max(1,x)})
       
-      clusterradius <- clusterstable[[sizeBy]] / max(clusterstable[[sizeBy]]) * 50000
-      #show(clusterradius)
-      #show(clusterstable$long)
-      #show(clusterstable$lat)
-      leafletProxy("map", data = clusterstable) %>%
-        clearShapes() %>%
-        addCircles(~long, ~lat, radius=clusterradius, layerId=~id,
-          stroke=FALSE, fillOpacity=0.4, fillColor=pal(clusterColorData)) %>%
-        addLegend("bottomleft", pal=pal, values=clusterColorData, title="Activity",
-          layerId="colorLegend")
-    }else{
-      radius <- commontable$iscluster * (commontable[[sizeBy]]/ max(clusterstable[[sizeBy]]) * 30000) +
-         (1-commontable$iscluster )* (commontable$employes / max(commontable$employes) * 50000 )
-      colorData<-commontable$activity
-      pal <- colorFactor("Spectral", as.factor(colorData))
+      congestion = 1 - (mintps$mintps / tps)
       
-      leafletProxy("map", data = commontable) %>%
+      pal <- colorNumeric(c("green","yellow","red"),domain = congestion[roads@data$id])
+      #show(pal)
+      #pal <- colorRampPalette(c("green","yellow","red"))
+      
+      show(pal(congestion[roads@data$id]))
+      
+      leafletProxy("map", data = data) %>%
         clearShapes() %>%
-        addCircles(~long, ~lat, radius=radius, layerId=~id,
-                   stroke=FALSE, fillOpacity=~(1-iscluster)*0.7+iscluster*0.3, fillColor=pal(colorData)) %>%
-        addLegend("bottomleft", pal=pal, values=colorData, title="Activity",
-                  layerId="colorLegend") %>%
-        addPolylines(data = links,weight=2.5)
-    }
+        #addCircles(~long, ~lat, radius=radius, layerId=~id,
+        #           stroke=FALSE, fillOpacity=~(1-iscluster)*0.7+iscluster*0.3, fillColor=pal(colorData)) %>%
+        #addLegend("bottomleft", pal=pal, values=colorData, title="Activity",
+        #          layerId="colorLegend") %>%
+        addPolylines(data = roads,weight=5,color = pal(congestion[roads@data$id]),
+                     fillOpacity=0.7
+                     )
+    #}
   })
 
   # Show a popup at the given location
