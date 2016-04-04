@@ -87,7 +87,7 @@ shinyServer(function(input, output, session) {
     
      
      # get time
-      rtimes = abs(times-input$time)
+      rtimes = abs(dates-input$time)
       #rtimes = abs(times-min(times))
       time = times[which(rtimes==min(rtimes))]
     

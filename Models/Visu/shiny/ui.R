@@ -26,7 +26,9 @@ shinyUI(navbarPage("Traffic", id="nav",
          #h2("Date"),
 # 
         
-        sliderInput(inputId = "time","Time",min = min(data$ts),max=max(data$ts),value=min(data$ts),step=NULL),
+        #sliderInput(inputId = "time","Time",min = min(data$ts),max=max(data$ts),value=min(data$ts),step=NULL),
+        selectInput("day", "day", days),
+         sliderInput(inputId = "time","Time",min = min(dates),max=max(dates),value=min(dates),step=NULL),
          selectInput("var", "Variable", vars)
         # color only activity
          #selectInput("color", "Color", vars),  

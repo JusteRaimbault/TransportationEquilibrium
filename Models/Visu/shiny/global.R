@@ -15,14 +15,19 @@
 library(RSQLite)
 library(dplyr)
 
-db = dbConnect(SQLite(),"../../Test/data/sytadin.sqlite3")
-data = dbReadTable(db,'data')
+db = dbConnect(SQLite(),"../../../Data/Sytadin/data/sytadin_20160404.sqlite3")
+#data = dbReadTable(db,'data')
+data = dbGetQuery(db,"SELECT * FROM data LIMIT 100000");
 data=as.tbl(data)
 data$ts=floor(data$ts)
 # add ids
 data$id = ((0:(nrow(data)-1))%%148)+1
 
-#as.data.frame(unique(data[which(data$ts==1454352603),1]))
+alltimes = as.tbl(dbGetQuery(db,"SELECT DISTINCT ts FROM data;"))
+alltimes$ts=floor(alltimes$ts)
+alltimes = unique(alltimes$ts)
+# not optimal -> should keep in cache collected dates
+days = format(as.POSIXct(unique(floor(alltimes / 86400))*86400, origin="1970-01-01"),format="%Y-%m-%d")
 
 # load spatial data
 library(rgdal)
@@ -31,6 +36,7 @@ roads <- readOGR('gis','troncons')
 
 
 times = unique(data$ts)
+dates = as.POSIXct(times, origin="1970-01-01")
 
 mintps = data %>% group_by(id) %>% summarise(mintps=max(1,min(tps)))
 
