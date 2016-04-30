@@ -100,7 +100,7 @@ shinyServer(function(input, output, session) {
       #show(pal)
       #pal <- colorRampPalette(c("green","yellow","red"))
       
-      show(pal(congestion[roads@data$id]))
+      #show(pal(congestion[roads@data$id]))
       
       leafletProxy("map", data = data) %>%
         clearShapes() %>%

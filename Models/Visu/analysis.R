@@ -4,7 +4,10 @@ setwd(paste0(Sys.getenv('CS_HOME'),'/TransportationEquilibrium/Models/Visu'))
 library(RSQLite)
 library(dplyr)
 
-db = dbConnect(SQLite(),"../../../Data/Sytadin/data/sytadin_20160404.sqlite3")
+source('functions.R')
+
+
+db = dbConnect(SQLite(),"../../Data/Sytadin/data/sytadin_20160404.sqlite3")
 #data = dbReadTable(db,'data')
 data = dbGetQuery(db,'SELECT * FROM data LIMIT 200000;')
 data=as.tbl(data)
@@ -131,10 +134,27 @@ library(igraph)
 
 lstrip <- function (x)  sub("^\\s+", "", x)
 nodes = sapply(unlist(sapply(data$troncon[roads@data$id],function(s){strsplit(strsplit(lstrip(s),"_")[[1]][1],"=")})),function(s){strsplit(s,"(",fixed=TRUE)[[1]][1]})
+# get coordinates : need extremities of roads
+vdf = data.frame()
+for(i in 1:(length(roads@lines))){
+  lcoords = roads@lines[[i]]@Lines[[1]]@coords
+  vdf = rbind(vdf,lcoords[1,]);vdf = rbind(vdf,lcoords[nrow(lcoords),])
+}
+vdf = data.frame(nodes,vdf)
+names(vdf)<-c("ID","x","y")
+vdf = vdf[!duplicated(vdf[,1]),]
+
+edf = data.frame(matrix(nodes,ncol=2,byrow=TRUE),congestion=congestion)
+# add missing links due to naming pb
+#  
+edf = correctNetwork(edf)
 
 #g=graph_from_edgelist(matrix(nodes,ncol=2,byrow=TRUE),directed=TRUE)
-g=graph_from_data_frame(data.frame(matrix(nodes,ncol=2,byrow=TRUE),congestion=congestion))
+g=graph_from_data_frame(edf,vertices = vdf)
 betweenness(g)
-plot(g,layout=layout.fruchterman.reingold,edge.width=20*congestion,edge.arrow.mode="-")
+plot(g,edge.width=20*congestion+5,edge.arrow.mode="-",vertex.size=4)
+
+
+
 
 
