@@ -131,30 +131,14 @@ g+facet_wrap(~decay)+xlab("time (h)")
 ##  graph measures
 
 library(igraph)
+source('functions.R')
 
-lstrip <- function (x)  sub("^\\s+", "", x)
-nodes = sapply(unlist(sapply(data$troncon[roads@data$id],function(s){strsplit(strsplit(lstrip(s),"_")[[1]][1],"=")})),function(s){strsplit(s,"(",fixed=TRUE)[[1]][1]})
-# get coordinates : need extremities of roads
-vdf = data.frame()
-for(i in 1:(length(roads@lines))){
-  lcoords = roads@lines[[i]]@Lines[[1]]@coords
-  vdf = rbind(vdf,lcoords[1,]);vdf = rbind(vdf,lcoords[nrow(lcoords),])
-}
-vdf = data.frame(nodes,vdf)
-names(vdf)<-c("ID","x","y")
-vdf = vdf[!duplicated(vdf[,1]),]
+g=constructGraph(data,roads)
 
-edf = data.frame(matrix(nodes,ncol=2,byrow=TRUE),congestion=congestion)
-# add missing links due to naming pb
-#  
-edf = correctNetwork(edf)
+plot(g,edge.width=edge_betweenness(g,weights = 1 - as.numeric(E(g)$congestion)/2)/10#20*congestion+5
+     ,edge.arrow.mode="-",vertex.size=4)
 
-#g=graph_from_edgelist(matrix(nodes,ncol=2,byrow=TRUE),directed=TRUE)
-g=graph_from_data_frame(edf,vertices = vdf)
-betweenness(g)
-plot(g,edge.width=20*congestion+5,edge.arrow.mode="-",vertex.size=4)
-
-
+betweenness(g,weights = 1 - as.numeric(edf$congestion)/2)
 
 
 
