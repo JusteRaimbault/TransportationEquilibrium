@@ -57,44 +57,17 @@ shinyServer(function(input, output, session) {
   # This observer is responsible for maintaining the circles and legend,
   # according to the variables the user has chosen to map to color and size.
   observe({
-    
-    #sizeBy <- input$clustersize
-    #show(paste0('cluster size by ',sizeBy))
-    
-    #clusterlevel = isClusterLevel()
-    #show(paste0('cluster level : ',clusterlevel))
-    
-    #show(clusterstable)
-    
-#     if(clusterlevel==TRUE){
-#       clusterColorData <- clusterstable[["activity"]]
-#       pal <- colorFactor("Spectral", as.factor(clusterColorData))
-#       
-#       clusterradius <- clusterstable[[sizeBy]] / max(clusterstable[[sizeBy]]) * 50000
-#       #show(clusterradius)
-#       #show(clusterstable$long)
-#       #show(clusterstable$lat)
-#       leafletProxy("map", data = clusterstable) %>%
-#         clearShapes() %>%
-#         addCircles(~long, ~lat, radius=clusterradius, layerId=~id,
-#           stroke=FALSE, fillOpacity=0.4, fillColor=pal(clusterColorData)) %>%
-#         addLegend("bottomleft", pal=pal, values=clusterColorData, title="Activity",
-#           layerId="colorLegend")
-#     }else{
-      #radius <- commontable$iscluster * (commontable[[sizeBy]]/ max(clusterstable[[sizeBy]]) * 30000) +
-      #   (1-commontable$iscluster )* (commontable$employes / max(commontable$employes) * 50000 )
-      #colorData<-commontable$activity
-    
-     
+  
      # get time
-      rtimes = abs(dates-input$time)
+      currentTime=as.numeric(format(as.POSIXct(globalReactives$currentDay),format="%s"))+as.numeric(format(input$time,format="%s"))
+      rtimes = abs(globalReactives$times-currentTime)
       #rtimes = abs(times-min(times))
-      time = times[which(rtimes==min(rtimes))]
+      time = globalReactives$times[which(rtimes==min(rtimes))]
     
-      currentData = data[data$ts==time,]
+      currentData = globalReactives$currentDailyData[globalReactives$currentDailyData$ts==time,]
       tps = sapply(currentData$tps,function(x){max(1,x)})
       
-      congestion = 1 - (mintps$mintps / tps)
+      congestion = 1 - (globalReactives$mintps$mintps / tps)
       
       pal <- colorNumeric(c("green","yellow","red"),domain = congestion[roads@data$id])
       #show(pal)
@@ -114,6 +87,23 @@ shinyServer(function(input, output, session) {
     #}
   })
 
+  
+  # observer to reload data if current day is changed
+  observe({
+    if(input$day!=currentDay){
+       show("updating daily data")
+       globalReactives$currentDay = input$day
+       daysts=as.numeric(format(as.POSIXct(currentDay),format="%s"))
+       globalReactives$currentDailyData = getData(daysts,daysts+86400)
+       globalReactives$times = unique(globalReactives$currentDailyData$ts)
+       globalReactives$mintps = globalReactives$currentDailyData %>% group_by(id) %>% summarise(mintps=max(1,min(tps)))
+       globalReactives$dates = as.POSIXct(globalReactives$times, origin="1970-01-01")
+       show("done")
+    }
+  })
+
+  # 
+  # 
   # Show a popup at the given location
 #   showZipcodePopup <- function(zipcode, lat, lng) {
 #     selectedZip <- allzips[allzips$zipcode == zipcode,]

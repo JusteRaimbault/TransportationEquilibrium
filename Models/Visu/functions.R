@@ -1,7 +1,16 @@
 
 # functions
 
-constructGraph<-function(data,roads){
+
+getCurrentData<-function(data,times,time){
+  rtimes = abs(times-time)
+  time = times[which(rtimes==min(rtimes))]
+  return(data[data$ts==time,])
+}
+
+
+
+constructGraph<-function(data,roads,times,time){
   lstrip <- function (x)  sub("^\\s+", "", x)
   nodes = sapply(unlist(sapply(data$troncon[roads@data$id],function(s){strsplit(strsplit(lstrip(s),"_")[[1]][1],"=")})),function(s){strsplit(s,"(",fixed=TRUE)[[1]][1]})
   # get coordinates : need extremities of roads
@@ -14,6 +23,14 @@ constructGraph<-function(data,roads){
   vdf = data.frame(nodes,vdf)
   names(vdf)<-c("ID","x","y")
   vdf = vdf[!duplicated(vdf[,1]),]
+  
+  # get congestion data
+  currentData = getCurrentData(data,times,time)
+  tps = sapply(currentData$tps,function(x){max(1,x)})
+  congestion = 1 - (mintps$mintps / tps)
+  # get corresponding congestions
+  congestion = congestion[roads@data$id]
+  
   
   edf = data.frame(matrix(nodes,ncol=2,byrow=TRUE),congestion=congestion,length=edgelengths)
   edf[,1]<-as.character(edf[,1]);edf[,2]<-as.character(edf[,2])

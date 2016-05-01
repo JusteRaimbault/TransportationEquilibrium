@@ -15,19 +15,34 @@
 library(RSQLite)
 library(dplyr)
 
-db = dbConnect(SQLite(),"../../../Data/Sytadin/data/sytadin_20160404.sqlite3")
+#db = dbConnect(SQLite(),"../../../Data/Sytadin/data/sytadin_20160430.sqlite3")
 #data = dbReadTable(db,'data')
-data = dbGetQuery(db,"SELECT * FROM data LIMIT 100000");
-data=as.tbl(data)
-data$ts=floor(data$ts)
-# add ids
-data$id = ((0:(nrow(data)-1))%%148)+1
 
-alltimes = as.tbl(dbGetQuery(db,"SELECT DISTINCT ts FROM data;"))
-alltimes$ts=floor(alltimes$ts)
-alltimes = unique(alltimes$ts)
+# issue in querying sqlite : load RData as a provisory solution
+load('data/february.RData')
+
+
+getData <- function(daysts,dayfts){
+  return(data[data$ts>daysts&data$ts<dayfts,])
+}
+
+
+
+#alltimes = as.tbl(dbGetQuery(db,"SELECT DISTINCT ts FROM data;"))
+#alltimes$ts=floor(alltimes$ts)
+#alltimes = unique(alltimes$ts)
 # not optimal -> should keep in cache collected dates
-days = format(as.POSIXct(unique(floor(alltimes / 86400))*86400, origin="1970-01-01"),format="%Y-%m-%d")
+alldays = seq(from=1454367600,to=1456614000,by=86400)
+days = format(as.POSIXct(unique(floor(alldays / 86400))*86400, origin="1970-01-01"),format="%Y-%m-%d")
+hours = as.POSIXct(seq(from=1,to=86400,by=120),origin="1970-01-01")
+
+globalReactives = reactiveValues()
+
+globalReactives$currentDay = days[1]
+globalReactives$currentDailyData = getData(alldays[1],alldays[2])
+globalReactives$times = unique(currentDailyData$ts)
+globalReactives$mintps = currentDailyData %>% group_by(id) %>% summarise(mintps=max(1,min(tps)))
+globalReactives$dates = as.POSIXct(unique(currentDailyData$ts), origin="1970-01-01")
 
 # load spatial data
 library(rgdal)
@@ -35,10 +50,11 @@ library(rgdal)
 roads <- readOGR('gis','troncons')
 
 
-times = unique(data$ts)
-dates = as.POSIXct(times, origin="1970-01-01")
 
-mintps = data %>% group_by(id) %>% summarise(mintps=max(1,min(tps)))
+
+#times = unique(data$ts)
+#dates = as.POSIXct(times, origin="1970-01-01")
+#mintps = data %>% group_by(id) %>% summarise(mintps=max(1,min(tps)))
 
 
 #id=55

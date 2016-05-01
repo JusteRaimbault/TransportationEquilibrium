@@ -9,7 +9,7 @@ source('functions.R')
 
 db = dbConnect(SQLite(),"../../Data/Sytadin/data/sytadin_20160404.sqlite3")
 #data = dbReadTable(db,'data')
-data = dbGetQuery(db,'SELECT * FROM data LIMIT 200000;')
+data = dbGetQuery(db,'SELECT * FROM data LIMIT 2000000;')
 data=as.tbl(data)
 data$ts=floor(data$ts)
 # add ids
@@ -21,6 +21,7 @@ roads <- readOGR('shiny/gis','troncons')
 
 
 times = unique(data$ts)
+dates = as.POSIXct(times, origin="1970-01-01")
 
 mintps = data %>% group_by(id) %>% summarise(mintps=max(1,min(tps)))
 
@@ -80,9 +81,8 @@ for(decay in decays){
   for(i in 1:length(times)){
     if(i%%100==0){show(i)}
     time=times[i]
-    rtimes = abs(times-time)
-    time = times[which(rtimes==min(rtimes))]
-    currentData = data[data$ts==time,]
+    currentData = getCurrentData(data,times,time)
+    
     tps = sapply(currentData$tps,function(x){max(1,x)})
     congestion = 1 - (mintps$mintps / tps)
     # get corresponding congestions
@@ -133,12 +133,38 @@ g+facet_wrap(~decay)+xlab("time (h)")
 library(igraph)
 source('functions.R')
 
-g=constructGraph(data,roads)
+# 
+#plot(g,edge.width=edge_betweenness(g,weights = 1 - as.numeric(E(g)$congestion)/2)/10#20*congestion+5
+#     ,edge.arrow.mode="-",vertex.size=4)
 
-plot(g,edge.width=edge_betweenness(g,weights = 1 - as.numeric(E(g)$congestion)/2)/10#20*congestion+5
-     ,edge.arrow.mode="-",vertex.size=4)
 
-betweenness(g,weights = 1 - as.numeric(edf$congestion)/2)
+bmean=c();bmed=c();bmin=c();bmax=c();relvar=c(0)
+betweennesses=c();btimes=c()
+for(i in 200:1000){#length(times)){
+  time=times[i]
+  show(dates[i])
+  gg=constructGraph(data,roads,times,time)
+  b = betweenness(gg,weights = (1 - as.numeric(E(gg)$congestion)/2)/as.numeric(E(gg)$length))
+  currentDist = distances(gg,weights = (1 - as.numeric(E(gg)$congestion)/2)/as.numeric(E(gg)$length))
+  diag(currentDist)=1
+  if(i>1){relvar=append(relvar,max(abs(((currentDist-prevDist)/currentDist))))}
+  prevDist=currentDist
+  #betweennesses=append(betweennesses,b);btimes=append(btimes,rep(time,length(b)))
+  bmean=append(bmean,mean(b));bmed=append(bmed,quantile(b,0.5));bmin=append(bmin,min(b));bmax=append(bmax,max(b))
+}
 
+  
+g=ggplot(data.frame(dates=dates[200:500],bmean,bmed,bmin,bmax))
+g+geom_line(aes(dates,bmean,color="mean"))+geom_line(aes(dates,bmed,color="med")) + theme(axis.text.x = element_text(angle = 90))
+#  geom_line(aes(times,bmin,color="min"))+geom_line(aes(times,bmax,color="max"))
+
+g=ggplot(data.frame(dates=dates[199:1000],relvar),aes(dates,relvar))
+g+geom_line(colour="lightskyblue3")+stat_smooth(method="loess", span=0.025,n=400,se = FALSE) + theme(axis.text.x = element_text(angle = 90))+
+    xlab("")+ylab("∆b / b")
+
+
+
+#g=ggplot(data.frame(time=(btimes-btimes[1])/3600,betweenness=betweennesses),aes(x=time,y=betweenness))
+#g+geom_point(pch='.')+stat_smooth(method="loess", span=0.02,n=400)
 
 

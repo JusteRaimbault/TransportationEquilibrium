@@ -27,10 +27,12 @@ shinyUI(navbarPage("Traffic", id="nav",
 # 
         
         #sliderInput(inputId = "time","Time",min = min(data$ts),max=max(data$ts),value=min(data$ts),step=NULL),
-        selectInput("day", "day", days),
-         sliderInput(inputId = "time","Time",min = min(dates),max=max(dates),value=min(dates),step=NULL),
-         selectInput("var", "Variable", vars)
-        # color only activity
+         selectInput("day", "day", days),
+         #sliderInput(inputId = "time","Time",min = min(globalReactives$dates),max=max(globalReactives$dates),value=min(globalReactives$dates),step=NULL),
+        sliderInput(inputId = "time","Time",format = "%H:%M",min = min(hours),max=max(hours),value=min(hours),step=NULL),
+        selectInput("var", "Variable", vars)
+       
+         # color only activity
          #selectInput("color", "Color", vars),  
          #selectInput("clustersize", "Cluster Size", clustervars, selected = "Employes")#,
          #selectInput("esize", "Entreprise Size", clustervars, selected = "Employes"),
