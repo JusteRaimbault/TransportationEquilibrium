@@ -29,7 +29,7 @@ shinyUI(navbarPage("Traffic", id="nav",
         #sliderInput(inputId = "time","Time",min = min(data$ts),max=max(data$ts),value=min(data$ts),step=NULL),
          selectInput("day", "day", days),
          #sliderInput(inputId = "time","Time",min = min(globalReactives$dates),max=max(globalReactives$dates),value=min(globalReactives$dates),step=NULL),
-        sliderInput(inputId = "time","Time",format = "%H:%M",min = min(hours),max=max(hours),value=min(hours),step=NULL),
+        sliderInput(inputId = "time","Time",timeFormat = "%H:%M",min = min(hours),max=max(hours),value=min(hours),step=NULL),
         selectInput("var", "Variable", vars)
        
          # color only activity
@@ -43,8 +43,16 @@ shinyUI(navbarPage("Traffic", id="nav",
 # 
 #         plotOutput("histCentile", height = 200),
 #         plotOutput("scatterCollegeIncome", height = 250)
-       )#,
-# 
+       ),
+
+      # plot panel
+      absolutePanel(id = "plots", class = "panel panel-default", fixed = TRUE,
+              draggable = TRUE, top = 400, left = "auto", right = 20, bottom = "auto",
+              width = 330, height = "auto",
+
+             plotOutput("dailyCong", height = 200)
+      ) 
+
 #       tags$div(id="cite",
 #         'Data compiled for ', tags$em('Coming Apart: The State of White America, 1960–2010'), ' by Charles Murray (Crown Forum, 2012).'
 #       )

@@ -25,46 +25,35 @@ shinyServer(function(input, output, session) {
         urlTemplate = "//{s}.tiles.mapbox.com/v3/jcheng.map-5ebohr46/{z}/{x}/{y}.png",
         attribution = 'Maps by <a href="http://www.mapbox.com/">Mapbox</a>'
       ) %>%
-      setView(lng = 2.5, lat = 48.5, zoom = 10)
+      setView(lng = 2.5, lat = 48.7, zoom = 10)
   })
 
-  # A reactive expression that returns the set of zips that are
-  # in bounds right now
-#   clustersInBounds <- reactive({
-#     if (is.null(input$map_bounds))
-#       return(clusterstable[FALSE,])
-#     bounds <- input$map_bounds
-#     latRng <- range(bounds$north, bounds$south)
-#     lngRng <- range(bounds$east, bounds$west)
-# 
-#     subset(clusterstable,
-#       Lat >= latRng[1] & Lat <= latRng[2] &
-#         Long >= lngRng[1] & Long <= lngRng[2])
-#   })
+  # get roads in bounds
+  roadsInBounds <- reactive({
+    if (is.null(input$map_bounds)) return(rep(TRUE,length(roads)))
+    bounds <- input$map_bounds
+    mapbbox = bbox(SpatialPoints(coords=matrix(c(bounds$west,bounds$north,bounds$west, bounds$south,bounds$east,bounds$north,bounds$east, bounds$south),ncol=2,byrow = TRUE),proj4string = roads@proj4string))
+    mapbbox=readWKT(paste0('POLYGON((',bounds$west,' ',bounds$north,',',bounds$east,' ',bounds$north,',',bounds$east,' ',bounds$south,',',bounds$west,' ',bounds$south,',',bounds$west,' ',bounds$north,'))'),p4s = roads@proj4string)
+    return(sapply(roads@lines,function(l){gContains(mapbbox,SpatialLines(list(l),proj4string = roads@proj4string))}))
+  })
  
-#    isClusterLevel<-reactive({
-#      if (is.null(input$map_bounds)){return(TRUE)}
-#      bounds <- input$map_bounds
-#      boundsall = bbox(france)
-#      if((bounds$north-bounds$south)<((boundsall[2,2]-boundsall[2,1])*changeLevelFactor)){
-#        return(FALSE)
-#      }else{return(TRUE)}
-#    })
-
-
+  getCurrentData <- reactive({
+    # get time
+    currentTime=as.numeric(format(as.POSIXct(globalReactives$currentDay),format="%s"))+as.numeric(format(input$time,format="%s"))
+    #show(paste0('current time : ',currentTime))
+    rtimes = abs(globalReactives$times-currentTime)
+    #rtimes = abs(times-min(times))
+    time = globalReactives$times[which(rtimes==min(rtimes))]
+    
+    return(globalReactives$currentDailyData[globalReactives$currentDailyData$ts==time,])
+  })
 
 
   # This observer is responsible for maintaining the circles and legend,
   # according to the variables the user has chosen to map to color and size.
   observe({
-  
-     # get time
-      currentTime=as.numeric(format(as.POSIXct(globalReactives$currentDay),format="%s"))+as.numeric(format(input$time,format="%s"))
-      rtimes = abs(globalReactives$times-currentTime)
-      #rtimes = abs(times-min(times))
-      time = globalReactives$times[which(rtimes==min(rtimes))]
     
-      currentData = globalReactives$currentDailyData[globalReactives$currentDailyData$ts==time,]
+      currentData = getCurrentData()
       tps = sapply(currentData$tps,function(x){max(1,x)})
       
       congestion = 1 - (globalReactives$mintps$mintps / tps)
@@ -90,18 +79,41 @@ shinyServer(function(input, output, session) {
   
   # observer to reload data if current day is changed
   observe({
-    if(input$day!=currentDay){
-       show("updating daily data")
+    if(input$day!=globalReactives$currentDay){
+       #show("updating daily data")
        globalReactives$currentDay = input$day
-       daysts=as.numeric(format(as.POSIXct(currentDay),format="%s"))
+       daysts=as.numeric(format(as.POSIXct(globalReactives$currentDay),format="%s"))
        globalReactives$currentDailyData = getData(daysts,daysts+86400)
        globalReactives$times = unique(globalReactives$currentDailyData$ts)
        globalReactives$mintps = globalReactives$currentDailyData %>% group_by(id) %>% summarise(mintps=max(1,min(tps)))
        globalReactives$dates = as.POSIXct(globalReactives$times, origin="1970-01-01")
-       show("done")
+       #show("done")
     }
   })
 
+  
+  # observer to plot congestion on currentDay
+  observe({
+    #show(roadsInBounds())
+    tps = sapply(globalReactives$currentDailyData$tps,function(x){max(1,x)})
+    k=length(globalReactives$mintps$mintps)
+    congestion = 1 - (rep(globalReactives$mintps$mintps,length(tps)/k) / tps)
+    rib = roadsInBounds()
+    bindexes = c(sapply(seq(from=0,to=length(tps),by=k),function(x){rep(x,length(which(rib)))}))
+    #bindexes=bindexes+rep(roads@data$id[rib],length(bindexes)/length(which(rib)))
+    indexes=bindexes+rep(roads@data$id[rib],length(bindexes)/length(which(rib)))
+    # what a mess !
+    df = data.frame(congestion=congestion[indexes],id=indexes-bindexes,time=as.POSIXct(globalReactives$currentDailyData$ts[indexes], origin="1970-01-01"))
+    
+    # render the ggplot
+    output$dailyCong <- renderPlot({
+      g=ggplot(df,aes(x=time,y=congestion))
+      #g+geom_line(aes(x=time,y=congestion,colour=id,group=id))
+      g+geom_point(pch='.')+geom_smooth(na.rm=TRUE)#+geom_line(aes(x=time,y=congestion,group=id),color="grey")#+stat_smooth(method="loess", span=0.025,n=400)
+
+    })
+    
+  })
   # 
   # 
   # Show a popup at the given location
