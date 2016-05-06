@@ -58,15 +58,20 @@ g+facet_wrap(~decay)+xlab("time (h)")
 
 
 load('res/graph.RData')
+# loads betweennessesdf, fulldistances
 
   
 g=ggplot(data.frame(dates=dates[200:500],bmean,bmed,bmin,bmax))
 g+geom_line(aes(dates,bmean,color="mean"))+geom_line(aes(dates,bmed,color="med")) + theme(axis.text.x = element_text(angle = 90))
 #  geom_line(aes(times,bmin,color="min"))+geom_line(aes(times,bmax,color="max"))
 
-g=ggplot(data.frame(dates=dates[199:1000],relvar),aes(dates,relvar))
-g+geom_line(colour="lightskyblue3")+stat_smooth(method="loess", span=0.025,n=400,se = FALSE) + theme(axis.text.x = element_text(angle = 90))+
-    xlab("")+ylab("∆b / b")
+
+bdf  =as.tbl(betweennessesdf)%>% group_by(btimes)%>%summarise(bmax=max(abs(betweennesses)))
+(bdf[2:nrow(bdf),2]-bdf[1:(nrow(bdf)-1),2])/bdf[1:(nrow(bdf)-1),2]
+bdf=data.frame(dates=dates[indexes],relvar=abs(bdf[2:nrow(bdf),2]-bdf[1:(nrow(bdf)-1),2])/bdf[1:(nrow(bdf)-1),2])
+g=ggplot(bdf)
+g+geom_line(aes_string("dates","bmax"),colour="lightskyblue3")+stat_smooth(se = FALSE) + theme(axis.text.x = element_text(angle = 90,size=20),axis.text.y=element_text(size=20))+
+    xlab("time")+ylab("|∆b| / b")
 
 
 
