@@ -14,37 +14,37 @@ source('prepareData.R')
 ##
 # autocorrelations
 
-decays=c(1,2,5,10,20,30,40)
+#decays=c(1,2,5,10,20,30,40)
 
-morantimes=c()
-morandecays=c()
-moran=c()
-moransd=c()
+#morantimes=c()
+#morandecays=c()
+#moran=c()
+#moransd=c()
 
-n=length(roads@lines)
-m = matrix(rep(1,n*n),nrow=n,ncol=n);diag(m)<-0
-for(decay in decays){
-  show(decay)
-  w=weightMatrix(decay)
-  for(i in 1:length(times)){
-    if(i%%1000==0){show(paste0('moran : ',i/length(times)));show(dates[i])}
-    time=times[i]
-    currentData = getCurrentData(data,times,time)
-    
-    tps = sapply(currentData$tps,function(x){max(1,x)})
-    congestion = 1 - (mintps$mintps / tps)
-    # get corresponding congestions
-    congestion = congestion[roads@data$id]
-    
-    rho=autocorr(congestion,w,m)
-    morantimes=append(morantimes,time);morandecays=append(morandecays,decay)
-    moran=append(moran,mean(rho));moransd=append(moransd,sd(rho))
-  }
-}
+#n=length(roads@lines)
+#m = matrix(rep(1,n*n),nrow=n,ncol=n);diag(m)<-0
+#for(decay in decays){
+#  show(decay)
+#  w=weightMatrix(decay)
+#  for(i in 1:length(times)){
+#    if(i%%1000==0){show(paste0('moran : ',i/length(times)));show(dates[i])}
+#    time=times[i]
+#    currentData = getCurrentData(data,times,time)
+#    
+#    tps = sapply(currentData$tps,function(x){max(1,x)})
+#    congestion = 1 - (mintps$mintps / tps)
+#    # get corresponding congestions
+#    congestion = congestion[roads@data$id]
+#    
+#    rho=autocorr(congestion,w,m)
+#    morantimes=append(morantimes,time);morandecays=append(morandecays,decay)
+#    moran=append(moran,mean(rho));moransd=append(moransd,sd(rho))
+#  }
+#}
 
-moranstats = data.frame(moran,moransd,morandecays,morantimes)
+#moranstats = data.frame(moran,moransd,morandecays,morantimes)
 
-save(moranstats,file='res/moran.RData')
+#save(moranstats,file='res/moran.RData')
 
 
 
