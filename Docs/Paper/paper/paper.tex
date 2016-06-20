@@ -152,7 +152,7 @@
 %% \dochead can also be used to include a conference title, if directed by the editors
 %% e.g. \dochead{17th International Conference on Dynamical Processes in Excited States of Solids}
 
-\title{Click here, type the title of your paper, Capitalize first letter}
+\title{Investigating the Empirical Existence of Static User Equilibrium}
 
 %% use optional labels to link authors explicitly to addresses:
 %% \author[label1,label2]{<author name>}
@@ -161,16 +161,18 @@
 
 
 
-\author[a]{First Author} 
-\author[b]{Second Author}
-\author[a,b]{Third Author\corref{cor1}}
+%\author[a]{First Author} 
+%\author[b]{Second Author}
+\author[a,b]{Juste Raimbault\corref{cor1}}
 
-\address[a]{First affiliation, Address, City and Postcode, Country}
-\address[b]{Second affiliation, Address, City and Postcode, Country}
+\address[a]{UMR CNRS 8504 G{\'e}ographie-cit{\'e}s, 13 rue du Four, 75006 Paris, France}
+\address[b]{UMR-T IFSTTAR 9403 LVMT, Cité Descartes, 77455 Champs-sur-Marne, France}
 
 \begin{abstract}
 %% Text of abstract
-Click here and insert your abstract text.
+%Click here and insert your abstract text.
+The Static User Equilibrium is a powerful framework for the theoretical study of traffic. Despite the restricting assumption of stationary flows that intuitively limit its application to real traffic systems, many operational models implementing it are still used without an empirical validation of the existence of the equilibrium. We investigate its existence on a traffic dataset of three months for the region of Paris, FR. The implementation of an application for interactive spatio-temporal data exploration allows to hypothesize a high spatial and temporal heterogeneity, and to guide further quantitative work. The assumption of locally stationary flows is invalidated in a first approximation by empirical results, as shown by a strong spatial and temporal variability in shortest paths and in network topological measures such as betweenness centrality. Furthermore, the behaviour of spatial autocorrelation index of congestion patterns at different spatial ranges suggest a chaotic evolution at the local scale, especially during peak hours. We finally discuss the implications of these empirical findings and describe further possible developments based on the estimation of Lyapounov dynamical stability of traffic flows.
+
 \end{abstract}
 
 \begin{keyword}
@@ -188,7 +190,7 @@ Type your keywords here, separated by semicolons ;
 \end{frontmatter}
 
 %\correspondingauthor[*]{Corresponding author. Tel.: +0-000-000-0000 ; fax: +0-000-000-0000.}
-\email{author@institute.xxx}
+\email{juste.raimbault@polytechnique.edu}
 
 %%
 %% Start line numbering here if you want
@@ -198,141 +200,145 @@ Type your keywords here, separated by semicolons ;
 %% main text
 
 %\enlargethispage{-7mm}
-\section{Main Text}
-\label{main}
 
-Here introduce the paper, and put a nome¬nclature if necessary, in a box with the same font size as the rest of the paper. The paragraphs continue from here and are only separated by headings, subheadings, images and formulae. The section headings are arranged by numbers, bold and 10 pt. Here follows further instructions for authors.
+%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+\label{introduction}
 
-\begin{nomenclature}
-\begin{deflist}[A]
-\defitem{A}\defterm{radius of}
-\defitem{B}\defterm{position of}
-\defitem{C}\defterm{further nomenclature continues down the page inside the text box\vspace*{-8pt}}
-\end{deflist}
-\end{nomenclature}
-\vspace*{0pt}
 
-\subsection{ Structure}
-Files must be in LaTeX format only and should be formatted for direct printing, using the CRC LaTeX template provided. Figures and tables should be embedded and not supplied separately. 
-
-Please make sure that you use as much as possible normal fonts in your documents. Special fonts, such as fonts used in the Far East (Japanese, Chinese, Korean, etc.) may cause problems during processing. To avoid unnecessary errors you are strongly advised to use the `spellchecker' function of TeX Editor. Follow this order when typing manuscripts: Title, Authors, Affiliations, Abstract, Keywords, Main text (including figures and tables), Acknowledgements, References, Appendix. Collate acknowledgements in a separate section at the end of the article and do not include them on the title page, as a footnote to the title or otherwise.
-
-Bulleted lists may be included and should look like this:
-\begin{itemize}[]
-\item First point
-\item Second point
-\item And so on
-\end{itemize}
-
-Ensure that you return to the `Els-body-text' style, the style that you will mainly be using for large blocks of text, when you have completed your bulleted list. 
-
-Please do not alter the formatting and style layouts which have been set up in this template document. As indicated in the template, papers should be prepared in single column format suitable for direct printing onto paper with trim size $192 \times 262$ mm. Do not number pages on the front, as page numbers will be added separately for the preprints and the Proceedings. Leave a line clear between paragraphs. All the required style templates are provided in the file ``LaTeX Template'' with the appropriate name supplied, e.g. choose 1. Els1st-order-head for your first order heading text, els-abstract-text for the abstract text etc.
-
-\subsection{ Tables}
-
-All tables should be numbered with Arabic numerals. Every table should have a caption. Headings should be placed above tables, left justified. Only horizontal lines should be used within a table, to distinguish the column headings from the body of the table, and immediately above and below the table. Tables must be embedded into the text and not supplied separately. Below is an example which the authors may find useful.
-
-\begin{table}[h]
-\caption{An example of a table.}
-\begin{tabular*}{\hsize}{@{\extracolsep{\fill}}lll@{}}
-\toprule
-An example of a column heading & Column A ({\it{t}}) & Column B ({\it{t}})\\
-\colrule
-And an entry &   1 &  2\\
-And another entry  & 3 &  4\\
-And another entry &  5 &  6\\
-\botrule
-\end{tabular*}
-\end{table}
-
-%\enlargethispage{12pt}
-
-\subsection{ Construction of references}
-
-References must be listed at the end of the paper. Do not begin them on a new page unless this is absolutely necessary. Authors should ensure that every reference in the text appears in the list of references and vice versa. Indicate references by \cite{clark} or \cite{Deal} or \cite{Fachinger2006} in the text. 
-
-Some examples of how your references should be listed are given at the end of this template in the `References' section, which will allow you to assemble your reference list according to the correct format and font size.
-
-Reference generation by using bibliography style commands for LaTeX template only.
-
-The author may use ``elsarticle-harv.bst'' as per the style required in document. The sample bib file could be referred. 
-If the author may using bibstyle for providing references author must comment the bibliography section in TeX file, Bibtex will generate the reference automatically.
-
-If the author may not able to view the references in output same could be done by copying the bibliography section from ``filename.bbl'' file and paste in TeX file.
+Traffic Modeling has been extensively studied since seminal work by Wardrop (1952): economical and technical elements at stake justify the need for a fine understanding of mechanisms ruling traffic flows at different scales. Many approaches with different purposes coexist today, of which we can cite dynamical micro-simulation models, generally opposed to equilibrium-based techniques. Whereas the validity of micro-based models has been largely discussed and their application often questioned, the literature is relatively poor on empirical studies assessing the stationary equilibrium assumption in the Static User Equilibrium (SUE) framework. Various more realistic developments have been documented in the literature, such as Dynamic Stochastic User Equilibrium (DSUE) (see e.g. a description by Han (2003)). Extensions including user behavior with choice models have more recently been proposed, such as Zhang et al. (2013) taking into account both the influence of road pricing and congestion on user choice with a probit model. Relaxations of other restricting assumptions such as pure user utility maximization have been also introduced, such as the Boundedly Rational User Equilibrium described by Mahmassani \& Chang (1987). In this framework, user have a range of satisfying utilities and equilibrium is achieved when all users are satisfied. It produces more complex features such as the existence of multiple equilibria, and allows to account for specific stylized facts such as irreversible network change as developed by Guo \& Liu (2011).
 
 
 
-\subsection{Section headings}
-Section headings should be left justified, bold, with the first letter capitalized and numbered consecutively, starting with the Introduction. Sub-section headings should be in capital and lower-case italic letters, numbered 1.1, 1.2, etc,~and left justified, with second~and subsequent lines indented. All headings should have a minimum of two text lines after them before a page or column break.
-Ensure the text area is not blank except for the last page.
-
-\subsection{General guidelines for the preparation of your text}
-Avoid hyphenation at the end of a line. Symbols denoting vectors and matrices should be indicated in bold type. Scalar variable names should normally be expressed using italics. Weights and measures should be expressed in SI units. All non-standard abbreviations or symbols must be defined when first mentioned, or a glossary provided.
-
-\subsection{File naming and delivery}
-Please title your files in this order `procedia acronym\_conference acronym\_authorslastname'.  Submit both the source file and the PDF to the Guest Editor.
-
-Artwork filenames should comply with the syntax ``aabbbbbb.ccc'', where:\vspace*{-12pt}
-\begin{itemize}
-\item a = artwork component type
-\item b = manuscript reference code
-\item c = standard file extension
-
-Component types:
-\item gr = figure
-\item pl = plate
-\item sc = scheme
-\item fx = fixed graphic
-\end{itemize}
+However some studies and real-world applications still rely on SUE. Parisian region e.g. uses a static model (MODUS) for traffic management and planning purposes. Leurent and Boujnah (2014) introduce a static model of traffic flow including parking cruising and parking lot choice: it is legitimate to ask, specifically at such small scales, if the stationary distribution of flows is a reality. An example of empirical investigation of classical assumptions is (Zhu and Levinson, 2010), in which revealed route choices are studied. Their conclusions question ``Wardrop’s first principle'' implying that users choose among a well-known set of alternatives. In the same spirit, we investigate the possible existence of the equilibrium in practice. More precisely, SUE assumes a stationary distribution of flows over the whole network. This assumption stays valid in the case of local stationarity, as soon as time scale for parameter evolution is considerably greater than typical time scales for travel. The second case which is more plausible and furthermore compatible with dynamical theoretical frameworks, is here tested empirically. 
 
 
-\subsection{Footnotes}
-Footnotes should be avoided if possible. Necessary footnotes should be denoted in the text by consecutive superscript letters\footnote{Footnote text.}. The footnotes should be typed single spaced, and in smaller type size (8 pt), at the foot of the page in which they are mentioned, and separated from the main text by a one line space extending at the foot of the column. The `Els-footnote' style is available in the ``TeX Template'' for the text of the footnote.
 
-Please do not change the margins of the template as this can result in the footnote falling outside printing range.
+The rest of the paper is organized as follows : data collection procedure and dataset are described ; we present then an interactive application for the interactive exploration of the dataset aimed to give intuitive insights into data patterns ; we present then results of various quantitative analyses that give convergent evidence for the non-stationarity of traffic flows ; we finally discuss implications of these results and possible developments.
 
 
-\section{Illustrations}
-All figures should be numbered with Arabic numerals (1,2,3,\,$\ldots.$). Every figure should have a caption. All\break photographs, schemas, graphs and diagrams are to be referred to as figures. Line drawings should be good quality\break scans or true electronic output. Low-quality scans are not acceptable. Figures must be embedded into the text and not supplied separately. In MS word input the figures must be properly coded. Preferred format of figures are PNG, JPEG, GIF etc. Lettering and symbols should be clearly defined either in the caption or in a legend provided as part of the figure. Figures should be placed at the top or bottom of a page wherever possible, as close as possible to the first reference to them in the paper. Please ensure that all the figures are of 300 DPI resolutions as this will facilitate good output.
-\begin{figure}[t]\vspace*{4pt}
-%\centerline{\includegraphics{fx1}\hspace*{5mm}\includegraphics{fx1}}
-\centerline{\includegraphics{gr1}}
-\caption{(a) first picture; (b) second picture.}
-\end{figure}
-
-The figure number and caption should be typed below the illustration in 8 pt and left justified [{{\bfseries\itshape Note:}} one-line captions of length less than column width (or full typesetting width or oblong) centered]. For more guidelines and information to help you submit high quality artwork please visit: http://www.elsevier.com/artworkinstructions\break Artwork has no text along the side of it in the main body of the text. However, if two images fit next to each other, these may be placed next to each other to save space. For example, see Fig.~1. 
 
 
-\section{Equations}
-Equations and formulae should be typed in Mathtype, and numbered consecutively with Arabic numerals in parentheses on the right hand side of the page (if referred to explicitly in the text). They should also be separated from the surrounding text by one space
-\begin{equation}
-\begin{array}{lcl}
-\displaystyle X_r &=& \displaystyle\dot{Q}^{''}_{rad}\left/\left(\dot{Q}^{''}_{rad} + \dot{Q}^{''}_{conv}\right)\right.\\[6pt]
-\displaystyle \rho &=& \displaystyle\frac{\vec{E}}{J_c(T={\rm const.})\cdot\left(P\cdot\left(\displaystyle\frac{\vec{E}}{E_c}\right)^m+(1-P)\right)}
-\end{array}
-\end{equation}
+%%%%%%%%%%%%%%%%%%%%%
+\section{Data collection}
 
 
-\section{Online license transfer}
-All authors are required to complete the Procedia exclusive license transfer agreement before the article can be published, which they can do online. This transfer agreement enables Elsevier to protect the copyrighted material for the authors, but does not relinquish the authors' proprietary rights. The copyright transfer covers the exclusive rights to reproduce and distribute the article, including reprints, photographic reproductions, microfilm or any other reproductions of similar nature and translations. Authors are responsible for obtaining from the copyright holder, the permission to reproduce any figures for which copyright exists.
+%%%%%%%%%%%%%%%%%%%%%
+\subsection{Dataset Construction}
 
-\section*{Acknowledgements}
 
-Acknowledgements and Reference heading should be left justified, bold, with the first letter capitalized but have no numbers. Text below continues as normal.
+We propose to work on the case study of Parisian Metropolitan Region. An open dataset was constructed for highway links within the region, collecting public real-time open data for travel times (available at www.sytadin.fr). As stated by Bouteiller \& Berjoan (2013), the availability of open datasets for transportation is far to be the rule, and we contribute thus to a data opening by the construction of our dataset. The automatized data collection script continues to enrich the database as time passes, allowing future extensions of this work on a larger dataset and a potential reuse by scientists or planners. The latest version of the dataset is available online (sqlite format) under a Creative Commons License at \texttt{http://37.187.242.99/files/public/sytadin{\_}20160430.sqlite3}.
 
-%% The Appendices part is started with the command \appendix;
-%% appendix sections are then done as normal sections
-%% \appendix
 
-%% \section{}
-%% \label{}
+%%%%%%%%%%%%%%%%%%%%%
+\subsection{Data Summary}
 
-\appendix
-\section{An example appendix}
-Authors including an appendix section should do so before References section. Multiple appendices should all have headings in the style used above. They will automatically be ordered A, B, C etc.
 
-\subsection{Example of a sub-heading within an appendix}
-There is also the option to include a subheading within the Appendix if you wish.
+A time granularity of 2 minutes was obtained for a three months period (February 2016 to April 2016 included). Spatial granularity is in average 10km, as travel times are provided for major links. The dataset contains 101 links. Raw data we use is effective travel time, from which we can construct travel speed and relative travel speed, defined as the ratio between optimal travel time (travel time without congestion, taken as minimal travel times on all time steps) and effective travel time. Congestion is constructed by inversion of a simple BPR function with exponent 1, i.e. we take   with  travel time in link i and  minimal travel time. The Data has been partially cross-validated using Google directions API, which provides limited access to real-time travel times: each 5min, 50 links randomly chosen (API limit) were checked. Variation across datasets has an overall relative variance less than 5\%, what we estimate reasonable for the use of our dataset.
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+\section{Methods and Results}
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Visualization of spatio-temporal congestion patterns}
+
+
+As our approach is fully empirical, a good knowledge of existing patterns for traffic variables, and in particular of their spatio-temporal variations, is essential to guide any quantitative analysis. Taking inspiration from an empirical model validation literature, more precisely Pattern-oriented Modeling techniques introduced by Grimm (2006), we are interested in macroscopic patterns at given temporal and spatial scales: the same way stylized facts are in that approach extracted from a system before trying to model it, we need to explore interactively data in space and time to find relevant patterns and associated scales. We implemented therefore an interactive web-application for data exploration using R packages shiny and leaflet1. It allows dynamically visualizing of congestion among the whole network or in a particular area when zoomed in. The application is accessible online at http://shiny.parisgeo.cnrs.fr/transportation/. A screenshot of the interface is presented in Figure 1. Main conclusion from interactive data exploration is that strong spatial and temporal heterogeneity is the rule. The temporal pattern recurring most often, peak and off-peak hours is on a non-negligible proportion of days perturbed. In a first approximation, non-peak hours may be approximated by a local stationary distribution of flows, whereas peaks are too narrow to allow the validation of the equilibrium assumption. Spatially we can observe that no spatial pattern is clearly emerging. It means that in case of a validity of static user equilibrium, meta-parameters ruling its establishment must vary at time scales smaller than one day. We argue that traffic system must in contrary be far-from-equilibrium, especially during peak hours when critical phase transitions occur at the origin of traffic jams. 
+
+
+
+\subsection{Spatio-temporal Variability of Travel Path}
+
+
+Following interactive exploration of data, we propose to quantify the spatial variability of congestion patterns to validate or invalidate the intuition that if equilibrium does exist in time, it is strongly dependent on space and localized. The variability in time and space of travel-time shortest paths is a first way to investigate flow stationarities from a game-theoretic point of view. Indeed, the static User Equilibrium is the stationary distribution of flows under which no user can improve its travel time by changing its route. A strong spatial variability of shortest paths at short time scales is thus evidence of non-stationarity, since a similar user will take a few time after a totally different route and not contribute to the same flow as a previous user. Such a variability is indeed observed on a non-negligible number of paths on each day of the dataset. We show in Figure 2 an example of extreme spatial variation of shortest path for a particular Origin-Destination pair.
+
+
+The systematic exploration of travel time variability across the whole dataset, and associated travel distance, confirms, as described in Figure 3, that travel time absolute variability has often high values of its maximum across OD pairs, up to 25 minutes with a temporal local mean around 10min. Corresponding spatial variability produces detours up to 35km.
+
+
+
+\subsection{Stability of Network measures}
+
+The variability of potential trajectories observed in the previous section can be confirmed by studying the variability of network properties. In particular, network topological measures capture global patterns of a transportation network. Centrality and node connectivity measures are classical indicators in transportation network description as recalled in Bavoux et al. (2005). The transportation literature has developed elaborated and operational network measures, such as network robustness measures to identify critical links and measure overall network resilience to disruptions (an example among many is the Network Trip Robustness index introduced in Sullivan et al. (2010)).
+
+
+We study more precisely the betweenness centrality of our transportation network, defined for a node as the number of shortest paths going through the node, i.e. by the equation
+
+% equation betweeness
+
+where V is the set of network vertices of size N, and p(o->d) is the set of nodes on the shortest path between vertices o and d (the shortest path being computed with effective travel times). This index is more relevant to our purpose than other measures of centrality such as closeness centrality that does not include potential congestion as betweenness centrality does.
+
+
+
+
+We show in Figure 4 the relative absolute variation of maximal betweenness centrality for the same time window than previous empirical indicators. More precisely we plot the value of
+
+% eq relative variability
+
+
+where  is the time step of the dataset (the smallest time window on which we can capture variability). This absolute relative variation has a direct meaning : a variation of 20\% (which is attained a significant number of times as shown in Fig. 4) means that in case of a negative variation, at least this proportion of potential travels have changed route and the local potential congestion has decrease of the same proportion. In the case of a positive variation, a single node has captured at least 20\% of travels. Under the assumption (that we do not try to verify in this work and assume to be also not verified as shown by Zhu and Levinson (2015), but that we use as a tool to give an idea of the concrete meaning of betweenness variability) that users rationally take the shortest path and assuming that a majority of travels are realized such a variation in centrality imply a similar variation in effective flows, leading to the conclusion that they can not be stationary in time (at least at a scale larger than ) nor in space.
+
+
+
+\subsection{Spatial heterogeneity of equilibrium}
+
+
+To obtain a different insight into spatial variability of congestion patterns, we propose to use an index of spatial autocorrelation, the Moran index (Tsai, 2005). More generally used in spatial analysis with diverse applications from the study of urban form to the quantification of segregation, it can be applied to any spatialized variable. It allows to establish neighborhood relations and unveils spatial local consistence of an equilibrium if applied on localized traffic variable. At a given point in space, local autocorrelation for variable c is computed by
+
+% Moran index def
+
+where K is a normalization constant equal to the sum of spatial weights times variable variance and  is variable mean. In our case, we take spatial weights of the form  with  typical decay distance and compute the autocorrelation between link congestion localized at link center. We capture therefore spatial correlations within a radius of same order than decay distance around the point i. The mean on all points yields spatial autocorrelation index I. A stationarity in flows should yield some temporal stability of the index.
+
+
+Figure 5 presents temporal evolution of spatial autocorrelation for congestion. As expected, we have a strong decrease of autocorrelation with distance decay parameter, for both amplitude and temporal average. The high temporal variability implies short time scales for potential stationarity windows. When comparing with congestion (fitted to plot scale for readability) for 1km decay, we observe that high correlations coincide with off-peak hours, whereas peaks involve vanishing correlations. Our interpretation, combined with the observed variability of spatial patterns, is that peak hours correspond to chaotic behaviour of the system, as jams can emerge in any link: correlation thus vanishes as feasible phase space for a chaotic dynamical system is filled by trajectories in an uniform way what is equivalent to apparently independent random relative speeds.
+
+
+
+\section{Discussion}
+
+\subsection{Theoretical and practical implications of empirical conclusions}
+
+We argue that the theoretical implications of our empirical findings do not imply in a total discarding of the Static User Equilibrium framework, but unveil more a need of stronger connections between theoretical literature and empirical studies. If each newly introduced theoretical framework is generally tested on one on more case study, there are no systematic comparisons of each on large and different datasets and on various objectives (prediction of traffic, reproduction of stylized facts, etc.) as systematic reviews are the rule in therapeutic evaluation for example. This imply however broader data and model sharing practices than the current ones. The precise knowledge of application potentialities for a given framework may induce unexpected developments such as its integration into larger models. The example of Land-use and Transportation Interaction studies (LUTI models) is a good illustration of how the SUE can still be used for larger purpose than transportation modeling.. Kryvobokov et al. describe two LUTI models, one of which includes two equilibria for four-step transportation model and for land-use evolution (households and firms relocation), the other being more dynamical. The conclusion is that each model has its own advantages regarding the pursued objective, and that the static model can be used for long time policy purposes, whereas the dynamic model provide more precise information at smaller time scale. In the first case, a more complicated transportation module would have been complicated to include, what is an advantage of the static user equilibrium.
+
+
+Concerning practical applications, it seems natural that static models should not be used for traffic forecast and management at small time scales (week or day) and efforts should be made to implement more realistic models. However the use of models by the planning and engineering community is not necessarily directly related to academic concerns and state-of-the-art. For the particular case of France and mobility models, Commenges (2013) showed that engineers had gone to the point of constructing inexistent problems and implementing corresponding models that they had imported from a totally different geographical context (planning in the United States). The use of one framework or type of model has historical reasons that may be difficult to overcome.
+
+
+
+\subsection{Towards explanative interpretations of non-stationarity}
+
+
+An assumption we formulate regarding the origin of non-stationarity of network flows, in view of data exploration and quantitative analysis of the database, is that the network is at least half of the time highly congested and in a critical state. The off-peak hours are the larger potential time windows of spatial and temporal stationarity, but consist in less than half of the time. As already interpreted through the behavior of autocorrelation indicator, a chaotic behavior may be at the origin of such variability in the congested hours. The same way a supercritical fluid may condense under the smallest external perturbation, the state of the link may qualitatively change with a small incident, producing a network disruption that may propagate and even amplify. The direct effect of traffic events (notified incidents or accidents) can not be studied without external data, and it could be interesting to enrich the database in that direction. It would allow establishing the proportion of disruptions that do appear to have a direct effect and quantify a level of criticality of network congestion in time, or to investigate more precise effects such as the consequences of an incident on traffic of the opposite lane.
+
+
+
+
+\subsection{Possible developments}
+
+Further work may be planned towards a more refined assessment of temporal stability on a region of the network, i.e. the quantitative investigation of consideration of peak stationarity given above. To do so we propose to compute numerically Liapounov stability of the dynamical system ruling traffic flows using numerical algorithms such as described by Goldhirsch et al. (1987). The value of Liapounov exponents provides the time scale by which the instable system runs out of equilibrium. Its comparison with peak duration and average travel time, across different spatial regions and scales should provide more information on the possible validity of the local stationarity assumption. This technique has already been introduced at an other scale in transportation studies, as e.g. Tordeux \& Lassarre (2016) that study the stability of speed regulation models at the microscopic scale to avoid traffic jams.
+
+
+
+Other research directions may consist in the test of other assumptions of static user equilibrium (as the rational shortest path choice, which would be however difficult to test on such an aggregated dataset, implying the use of simulation models calibrated and cross-validated on the dataset to compare assumptions, without necessarily a direct clear validation or invalidation of the assumption), or the empirical computation of parameters in stochastic or dynamical user equilibrium frameworks. 
+
+
+
+\section{Conclusion}
+
+
+We have described an empirical study aimed at a simple but from our point of view necessary investigation of the existence of the static user equilibrium, more precisely of its stationarity in space and time on a metropolitan highway network. We constructed by data collection a traffic congestion dataset for the highway network of Greater Paris on 3 months with two minutes temporal granularity. The interactive exploration of the dataset with a web application allowing spatio-temporal data visualization helped to guide quantitative studies. Spatio-temporal variability of shortest paths and of network topology, in particular betweenness centrality, revealed that stationarity assumptions do not hold in general, what was confirmed by the study of spatial autocorrelation of network congestion. We suggest that our findings highlight a general need of higher connections between theoretical and empirical studies, as our work can discard misunderstandings on the theoretical static user equilibrium framework and guide the choice of a potential application.
+
+
+
+
+
+
+
 %% References
 %%
 %% Following citation commands can be used in the body text:
@@ -344,8 +350,176 @@ There is also the option to include a subheading within the Appendix if you wish
 %The citation must be used in following style: \cite{article-minimal} \cite{article-full} \cite{article-crossref} \cite{whole-journal}.
 %% References with BibTeX database:
 
-%\bibliography{xampl}
-%\bibliographystyle{elsarticle-harv}
+\bibliography{xampl}
+\bibliographystyle{elsarticle-harv}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%
+% Original templates
+
+
+
+
+
+
+
+%Here introduce the paper, and put a nome¬nclature if necessary, in a box with the same font size as the rest of the paper. The paragraphs continue from here and are only separated by headings, subheadings, images and formulae. The section headings are arranged by numbers, bold and 10 pt. Here follows further instructions for authors.
+
+%\begin{nomenclature}
+%\begin{deflist}[A]
+%\defitem{A}\defterm{radius of}
+%\defitem{B}\defterm{position of}
+%\defitem{C}\defterm{further nomenclature continues down the page inside the text box\vspace*{-8pt}}
+%\end{deflist}
+%\end{nomenclature}
+%\vspace*{0pt}
+
+%\subsection{ Structure}
+%Files must be in LaTeX format only and should be formatted for direct printing, using the CRC LaTeX template provided. Figures and tables should be embedded and not supplied separately. 
+
+%Please make sure that you use as much as possible normal fonts in your documents. Special fonts, such as fonts used in the Far East (Japanese, Chinese, Korean, etc.) may cause problems during processing. To avoid unnecessary errors you are strongly advised to use the `spellchecker' function of TeX Editor. Follow this order when typing manuscripts: Title, Authors, Affiliations, Abstract, Keywords, Main text (including figures and tables), Acknowledgements, References, Appendix. Collate acknowledgements in a separate section at the end of the article and do not include them on the title page, as a footnote to the title or otherwise.
+
+%Bulleted lists may be included and should look like this:
+%\begin{itemize}[]
+%\item First point
+%\item Second point
+%\item And so on
+%\end{itemize}
+
+%Ensure that you return to the `Els-body-text' style, the style that you will mainly be using for large blocks of text, when you have completed your bulleted list. 
+
+%Please do not alter the formatting and style layouts which have been set up in this template document. As indicated in the template, papers should be prepared in single column format suitable for direct printing onto paper with trim size $192 \times 262$ mm. Do not number pages on the front, as page numbers will be added separately for the preprints and the Proceedings. Leave a line clear between paragraphs. All the required style templates are provided in the file ``LaTeX Template'' with the appropriate name supplied, e.g. choose 1. Els1st-order-head for your first order heading text, els-abstract-text for the abstract text etc.
+
+%\subsection{ Tables}
+
+%All tables should be numbered with Arabic numerals. Every table should have a caption. Headings should be placed above tables, left justified. Only horizontal lines should be used within a table, to distinguish the column headings from the body of the table, and immediately above and below the table. Tables must be embedded into the text and not supplied separately. Below is an example which the authors may find useful.
+
+%\begin{table}[h]
+%\caption{An example of a table.}
+%\begin{tabular*}{\hsize}{@{\extracolsep{\fill}}lll@{}}
+%\toprule
+%An example of a column heading & Column A ({\it{t}}) & Column B ({\it{t}})\\
+%\colrule
+%And an entry &   1 &  2\\
+%And another entry  & 3 &  4\\
+%And another entry &  5 &  6\\
+%\botrule
+%\end{tabular*}
+%\end{table}
+
+
+
+
+
+
+
+
+
+
+%%\enlargethispage{12pt}
+
+%\subsection{ Construction of references}
+
+%References must be listed at the end of the paper. Do not begin them on a new page unless this is absolutely necessary. Authors should ensure that every reference in the text appears in the list of references and vice versa. Indicate references by \cite{clark} or \cite{Deal} or \cite{Fachinger2006} in the text. 
+
+%Some examples of how your references should be listed are given at the end of this template in the `References' section, which will allow you to assemble your reference list according to the correct format and font size.
+
+%Reference generation by using bibliography style commands for LaTeX template only.
+
+%The author may use ``elsarticle-harv.bst'' as per the style required in document. The sample bib file could be referred. 
+%If the author may using bibstyle for providing references author must comment the bibliography section in TeX file, Bibtex will generate the reference automatically.
+
+%If the author may not able to view the references in output same could be done by copying the bibliography section from ``filename.bbl'' file and paste in TeX file.
+
+
+
+
+
+
+
+%\subsection{Section headings}
+%Section headings should be left justified, bold, with the first letter capitalized and numbered consecutively, starting with the Introduction. Sub-section headings should be in capital and lower-case italic letters, numbered 1.1, 1.2, etc,~and left justified, with second~and subsequent lines indented. All headings should have a minimum of two text lines after them before a page or column break.
+%Ensure the text area is not blank except for the last page.
+
+%\subsection{General guidelines for the preparation of your text}
+%Avoid hyphenation at the end of a line. Symbols denoting vectors and matrices should be indicated in bold type. Scalar variable names should normally be expressed using italics. Weights and measures should be expressed in SI units. All non-standard abbreviations or symbols must be defined when first mentioned, or a glossary provided.
+
+%\subsection{File naming and delivery}
+%Please title your files in this order `procedia acronym\_conference acronym\_authorslastname'.  Submit both the source file and the PDF to the Guest Editor.
+
+%Artwork filenames should comply with the syntax ``aabbbbbb.ccc'', where:\vspace*{-12pt}
+%\begin{itemize}
+%\item a = artwork component type
+%\item b = manuscript reference code
+%\item c = standard file extension
+
+%Component types:
+%\item gr = figure
+%\item pl = plate
+%\item sc = scheme
+%\item fx = fixed graphic
+%\end{itemize}
+
+
+%\subsection{Footnotes}
+%Footnotes should be avoided if possible. Necessary footnotes should be denoted in the text by consecutive superscript letters\footnote{Footnote text.}. The footnotes should be typed single spaced, and in smaller type size (8 pt), at the foot of the page in which they are mentioned, and separated from the main text by a one line space extending at the foot of the column. The `Els-footnote' style is available in the ``TeX Template'' for the text of the footnote.
+
+%Please do not change the margins of the template as this can result in the footnote falling outside printing range.
+
+
+%\section{Illustrations}
+%All figures should be numbered with Arabic numerals (1,2,3,\,$\ldots.$). Every figure should have a caption. All\break photographs, schemas, graphs and diagrams are to be referred to as figures. Line drawings should be good quality\break scans or true electronic output. Low-quality scans are not acceptable. Figures must be embedded into the text and not supplied separately. In MS word input the figures must be properly coded. Preferred format of figures are PNG, JPEG, GIF etc. Lettering and symbols should be clearly defined either in the caption or in a legend provided as part of the figure. Figures should be placed at the top or bottom of a page wherever possible, as close as possible to the first reference to them in the paper. Please ensure that all the figures are of 300 DPI resolutions as this will facilitate good output.
+%\begin{figure}[t]\vspace*{4pt}
+%\centerline{\includegraphics{fx1}\hspace*{5mm}\includegraphics{fx1}}
+%\centerline{\includegraphics{gr1}}
+%\caption{(a) first picture; (b) second picture.}
+%\end{figure}
+
+%The figure number and caption should be typed below the illustration in 8 pt and left justified [{{\bfseries\itshape Note:}} one-line captions of length less than column width (or full typesetting width or oblong) centered]. For more guidelines and information to help you submit high quality artwork please visit: http://www.elsevier.com/artworkinstructions\break Artwork has no text along the side of it in the main body of the text. However, if two images fit next to each other, these may be placed next to each other to save space. For example, see Fig.~1. 
+
+
+%\section{Equations}
+%Equations and formulae should be typed in Mathtype, and numbered consecutively with Arabic numerals in parentheses on the right hand side of the page (if referred to explicitly in the text). They should also be separated from the surrounding text by one space
+%\begin{equation}
+%\begin{array}{lcl}
+%\displaystyle X_r &=& \displaystyle\dot{Q}^{''}_{rad}\left/\left(\dot{Q}^{''}_{rad} + \dot{Q}^{''}_{conv}\right)\right.\\[6pt]
+%\displaystyle \rho &=& \displaystyle\frac{\vec{E}}{J_c(T={\rm const.})\cdot\left(P\cdot\left(\displaystyle\frac{\vec{E}}{E_c}\right)^m+(1-P)\right)}
+%\end{array}
+%\end{equation}
+
+
+%\section{Online license transfer}
+%All authors are required to complete the Procedia exclusive license transfer agreement before the article can be published, which they can do online. This transfer agreement enables Elsevier to protect the copyrighted material for the authors, but does not relinquish the authors' proprietary rights. The copyright transfer covers the exclusive rights to reproduce and distribute the article, including reprints, photographic reproductions, microfilm or any other reproductions of similar nature and translations. Authors are responsible for obtaining from the copyright holder, the permission to reproduce any figures for which copyright exists.
+
+
+
+
+
+
+
+
+%\section*{Acknowledgements}
+
+%Acknowledgements and Reference heading should be left justified, bold, with the first letter capitalized but have no numbers. Text below continues as normal.
+
+%% The Appendices part is started with the command \appendix;
+%% appendix sections are then done as normal sections
+%% \appendix
+
+%% \section{}
+%% \label{}
+
+%\appendix
+%\section{An example appendix}
+%Authors including an appendix section should do so before References section. Multiple appendices should all have headings in the style used above. They will automatically be ordered A, B, C etc.
+
+%\subsection{Example of a sub-heading within an appendix}
+%There is also the option to include a subheading within the Appendix if you wish.
+
+
 
 
 %% Authors are advised to use a BibTeX database file for their reference list.
@@ -353,79 +527,101 @@ There is also the option to include a subheading within the Appendix if you wish
 
 %% For references without a BibTeX database:
 
- \begin{thebibliography}{}
+% \begin{thebibliography}{}
 
 %% \bibitem must have the following form:
 %%   \bibitem{key}...
 %%
 
-\bibitem[Clark et al.(1962)]{clark}Clark, T., Woodley, R., De Halas, D., 1962. Gas-Graphite Systems, in ``{\it Nuclear Graphite}''. 
-In: Nightingale, R. (Ed.). Academic Press, New York, pp. 387.
+%\bibitem[Clark et al.(1962)]{clark}Clark, T., Woodley, R., De Halas, D., 1962. Gas-Graphite Systems, in ``{\it Nuclear Graphite}''. 
+%In: Nightingale, R. (Ed.). Academic Press, New York, pp. 387.
 
-\bibitem[Deal and Grove(2009) ]{Deal}Deal, B., Grove, A., 1965. General Relationship for the Thermal Oxidation of Silicon. Journal of Applied Physics 36, 37--70.
+%\bibitem[Deal and Grove(2009) ]{Deal}Deal, B., Grove, A., 1965. General Relationship for the Thermal Oxidation of Silicon. Journal of Applied Physics 36, 37--70.
 
-\bibitem[Deep(2009)]{Deep}Deep-Burn Project: Annual Report for 2009, Idaho National Laboratory, Sept. 2009.
+%\bibitem[Deep(2009)]{Deep}Deep-Burn Project: Annual Report for 2009, Idaho National Laboratory, Sept. 2009.
 
-\bibitem[Fachinger(2004)]{Fachinger2004}Fachinger, J., den Exter, M., Grambow, B., Holgerson, S., Landesmann, C., Titov, M., Podruhzina, T., 2004. ``Behavior of spent HTR fuel elements in aquatic phases of repository host rock formations,'' 2nd International Topical Meeting on High Temperature Reactor Technology. Beijing, China, paper \#B08. 
+%\bibitem[Fachinger(2004)]{Fachinger2004}Fachinger, J., den Exter, M., Grambow, B., Holgerson, S., Landesmann, C., Titov, M., Podruhzina, T., 2004. ``Behavior of spent HTR fuel elements in aquatic phases of repository host rock formations,'' 2nd International Topical Meeting on High Temperature Reactor Technology. Beijing, China, paper \#B08. 
 
-\bibitem[Fachinger(2006)]{Fachinger2006}Fachinger, J., 2006. Behavior of HTR Fuel Elements in Aquatic Phases of Repository Host Rock Formations. Nuclear Engineering \& Design 236,     54.
+%\bibitem[Fachinger(2006)]{Fachinger2006}Fachinger, J., 2006. Behavior of HTR Fuel Elements in Aquatic Phases of Repository Host Rock Formations. Nuclear Engineering \& Design 236,     54.
 
 
- \end{thebibliography}
+ %\end{thebibliography}
 
-\clearpage
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%\clearpage
 
 %%%% This page is for instructions only, once the article is finalize please omit the below text before creating the final PDF
-\normalMode
+%\normalMode
 
-\section*{Instructions to Authors for LaTeX template:}
+%\section*{Instructions to Authors for LaTeX template:}
 
-\section{ZIP mode for LaTeX template:}
+%\section{ZIP mode for LaTeX template:}
 
-The zip package is created as per the guide lines present on the URL http://www.elsevier.com/author-schemas/ preparing-crc-journal-articles-with-latex for creating the LaTeX zip file of Procedia LaTeX template.  The zip generally contains the following files:
-\begin{Itemize}[]\leftskip-17.7pt\labelsep3.3pt
-\item ecrc.sty
-\item  elsarticle.cls
-\item elsdoc.pdf
-\item .bst file
-\item Manuscript templates for use with these bibliographic styles
-\item  Generic and journal specific logos, etc.
-\end{Itemize}
+%The zip package is created as per the guide lines present on the URL http://www.elsevier.com/author-schemas/ preparing-crc-journal-articles-with-latex for creating the LaTeX zip file of Procedia LaTeX template.  The zip generally contains the following files:
+%\begin{Itemize}[]\leftskip-17.7pt\labelsep3.3pt
+%\item ecrc.sty
+%\item  elsarticle.cls
+%\item elsdoc.pdf
+%\item .bst file
+%\item Manuscript templates for use with these bibliographic styles
+%\item  Generic and journal specific logos, etc.
+%\end{Itemize}
 
-The LaTeX package is the main LaTeX template. All LaTeX support files are required for LaTeX pdf generation from the LaTeX template package. 
+%The LaTeX package is the main LaTeX template. All LaTeX support files are required for LaTeX pdf generation from the LaTeX template package. 
 
-{\bf Reference style .bst file used for collaboration support:} In the LaTeX template packages of all Procedia titles a new ``.bst'' file is used which supports collaborations downloaded from the path http://www.elsevier.com/author-schemas/the-elsarticle-latex-document-class
+%{\bf Reference style .bst file used for collaboration support:} In the LaTeX template packages of all Procedia titles a new ``.bst'' file is used which supports collaborations downloaded from the path http://www.elsevier.com/author-schemas/the-elsarticle-latex-document-class
 
-\section{Reference styles used in  Procedia master templates:}
-\let\footnotesize\normalsize
-\hspace*{-10pt}\begin{tabular*}{\hsize}{@{}ll@{}}
-{\bf Title}&{\bf Reference style} \\[6pt]
-AASPRO  & 2 Harvard\\
-AASRI Procedia  & 3 Vancouver Numbered\\
-APCBEE Procedia  & 3 Vancouver Numbered\\
-EGYPRO  & 3 Vancouver Numbered\\
-FINE    & 2 Harvard\\
-IERI Procedia  & 3 Vancouver Numbered\\
-MATPR  & 1a Numbered without article titles\\
-MSPRO  & 2 Harvard\\
-PHPRO  & 2 Harvard\\
-PIUTAM  & 3a Embellished Vancouver \\
-Procedia CIRP  & 3 Vancouver Numbered\\
-PROCHE  & 3a Embellished Vancouver \\
-PROCS  & 3a Embellished Vancouver \\
-PROENG  & 1 Numbered\\
-PROENV  & 3a Embellished Vancouver \\
-PROEPS  & 3a Embellished Vancouver \\
-PROFOO    & 3a Embellished Vancouver \\
-PROMFG  & 1a Numbered without article titles\\
-PROTCY  & 3 Vancouver Numbered\\
-PROVAC  & 3a Embellished Vancouver \\
-SBSPRO  & 5 APA\\
-SEPRO  & 3a Embellished Vancouver \\
-AQPRO & 2 Harvard\\
-UMKPRO & 5 APA\\
-TRPRO  & 2 Harvard\\
-\end{tabular*}
+%\section{Reference styles used in  Procedia master templates:}
+%\let\footnotesize\normalsize
+%\hspace*{-10pt}\begin{tabular*}{\hsize}{@{}ll@{}}
+%{\bf Title}&{\bf Reference style} \\[6pt]
+%AASPRO  & 2 Harvard\\
+%AASRI Procedia  & 3 Vancouver Numbered\\
+%APCBEE Procedia  & 3 Vancouver Numbered\\
+%EGYPRO  & 3 Vancouver Numbered\\
+%FINE    & 2 Harvard\\
+%IERI Procedia  & 3 Vancouver Numbered\\
+%MATPR  & 1a Numbered without article titles\\
+%MSPRO  & 2 Harvard\\
+%PHPRO  & 2 Harvard\\
+%PIUTAM  & 3a Embellished Vancouver \\
+%Procedia CIRP  & 3 Vancouver Numbered\\
+%PROCHE  & 3a Embellished Vancouver \\
+%PROCS  & 3a Embellished Vancouver \\
+%PROENG  & 1 Numbered\\
+%PROENV  & 3a Embellished Vancouver \\
+%PROEPS  & 3a Embellished Vancouver \\
+%PROFOO    & 3a Embellished Vancouver \\
+%PROMFG  & 1a Numbered without article titles\\
+%PROTCY  & 3 Vancouver Numbered\\
+%PROVAC  & 3a Embellished Vancouver \\
+%SBSPRO  & 5 APA\\
+%SEPRO  & 3a Embellished Vancouver \\
+%AQPRO & 2 Harvard\\
+%UMKPRO & 5 APA\\
+%TRPRO  & 2 Harvard\\
+%\end{tabular*}
+
+
+
+
+
+
+
+
 
 \end{document}
 
