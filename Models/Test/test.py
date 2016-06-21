@@ -9,7 +9,7 @@ key = conf.readline().replace('\n','')
 #print(key)
 
 # get random link with coords from coords file
-coordsfile = open('conf/linkcoords.csv','r')
+coordsfile = open('setup/linkcoords.csv','r')
 coords = coordsfile.readlines()
 coordline = coords[numpy.random.choice(len(coords),1)].replace('\n','').split(';')
 linkid=coordline[0]
