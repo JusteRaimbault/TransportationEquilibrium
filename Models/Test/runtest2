@@ -1,2 +1,2 @@
 cd /root/ComplexSystems/TransportationEquilibrium/Models/Test
-python -W ignore test2.py
+python test2.py
