@@ -16,6 +16,8 @@ linkid=coordline[0]
 origin=coordline[2]+','+coordline[1]
 destination=coordline[4]+','+coordline[3]
 
+print origin+' -> '+destination
+
 result = requests.get('https://maps.googleapis.com/maps/api/directions/json?origin='+origin+'&destination='+destination+'&departure_time=now&traffic_model=best_guess&key='+key)
 data = result.json()
 
