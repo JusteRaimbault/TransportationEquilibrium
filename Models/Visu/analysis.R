@@ -31,8 +31,41 @@ for(i in 1:nrow(datagmaps)){
 ###############
 ## Spatial autocorr
 
+
 # remote computation
-load('res/moran.RData')
+#load('res/moran.RData')
+
+#sd(autocorr(time,20))
+
+#decays=c(1,2,5,10,20,30,40)
+decays = c(1,10)
+
+dtimes=c()
+ddecays=c()
+moran=c()
+moransd=c()
+
+n=length(roads@lines)
+m = matrix(rep(1,n*n),nrow=n,ncol=n);diag(m)<-0
+for(decay in decays){
+  show(decay)
+  w=weightMatrix(decay)
+  for(i in 1:length(times)){
+    if(i%%100==0){show(i)}
+    time=times[i]
+    rtimes = abs(times-time)
+    time = times[which(rtimes==min(rtimes))]
+    currentData = data[data$ts==time,]
+    tps = sapply(currentData$tps,function(x){max(1,x)})
+    congestion = 1 - (mintps$mintps / tps)
+    # get corresponding congestions
+    congestion = congestion[roads@data$id]
+    
+    rho=autocorr(congestion,w,m)
+    dtimes=append(dtimes,time);ddecays=append(ddecays,decay)
+    moran=append(moran,mean(rho));moransd=append(moransd,sd(rho))
+  }
+}
 
 
 ## ggplot of results
