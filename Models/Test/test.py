@@ -11,7 +11,7 @@ key = conf.readline().replace('\n','')
 # get random link with coords from coords file
 coordsfile = open('setup/linkcoords.csv','r')
 coords = coordsfile.readlines()
-coordline = coords[numpy.random.choice(len(coords),1)].replace('\n','').split(';')
+coordline = coords[numpy.random.randint(0,len(coords),1)].replace('\n','').split(';')
 linkid=coordline[0]
 origin=coordline[2]+','+coordline[1]
 destination=coordline[4]+','+coordline[3]
