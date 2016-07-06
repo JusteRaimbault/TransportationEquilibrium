@@ -6,45 +6,45 @@ Database file #1: ../biblio.bib
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Warning--empty journal in bouteiller2013open
 Warning--empty pages in zhu2010people
-You've used 8 entries,
+You've used 16 entries,
             2990 wiz_defined-function locations,
-            686 strings with 6851 characters,
-and the built_in function-call counts, 4829 in all, are:
-= -- 386
-> -- 136
-< -- 7
-+ -- 55
-- -- 45
-* -- 494
-:= -- 701
-add.period$ -- 22
-call.type$ -- 8
-change.case$ -- 55
-chr.to.int$ -- 8
-cite$ -- 10
-duplicate$ -- 379
-empty$ -- 383
-format.name$ -- 75
-if$ -- 899
+            734 strings with 8700 characters,
+and the built_in function-call counts, 10264 in all, are:
+= -- 774
+> -- 392
+< -- 10
++ -- 155
+- -- 135
+* -- 1099
+:= -- 1505
+add.period$ -- 46
+call.type$ -- 16
+change.case$ -- 124
+chr.to.int$ -- 16
+cite$ -- 18
+duplicate$ -- 777
+empty$ -- 768
+format.name$ -- 187
+if$ -- 1887
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 68
-newline$ -- 54
-num.names$ -- 32
-pop$ -- 140
+missing$ -- 148
+newline$ -- 94
+num.names$ -- 64
+pop$ -- 299
 preamble$ -- 2
-purify$ -- 47
+purify$ -- 109
 quote$ -- 0
-skip$ -- 109
+skip$ -- 220
 stack$ -- 0
-substring$ -- 234
-swap$ -- 245
+substring$ -- 443
+swap$ -- 530
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 72
+type$ -- 141
 warning$ -- 2
-while$ -- 36
+while$ -- 70
 width$ -- 0
-write$ -- 123
+write$ -- 231
 (There were 2 warnings)
