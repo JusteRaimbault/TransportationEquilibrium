@@ -5,7 +5,7 @@ source('functions.R')
 
 
 db = dbConnect(SQLite(),"../../Data/Sytadin/data/sytadin_20160703.sqlite3")
-data = dbGetQuery(db,'SELECT * FROM data WHERE ts > 1466545462;')
+data = dbGetQuery(db,'SELECT * FROM data;') #WHERE ts > 1466545462;')
 
 source('prepareData.R')
 
@@ -15,17 +15,20 @@ source('prepareData.R')
 ## Data variability validation
 dbgm = dbConnect(SQLite(),"../../Data/GMaps/Validation/gmaps_20160703.sqlite3")
 datagmaps = dbGetQuery(dbgm,'SELECT * FROM data;')
+reddata = data[data$ts>1466545000,]
 
 relvars = c();timevar = c()
 for(i in 1:nrow(datagmaps)){
   if(i%%100==0){show(i)}
-  rows = which(abs(datagmaps$ts[i]-data$ts)<120&data$id==datagmaps$id[i])
+  rows = which(abs(datagmaps$ts[i]-reddata$ts)<120&reddata$id==datagmaps$id[i])
   if(length(rows)>0&datagmaps$tps[i]>60){
-    t1=datagmaps$tps[i]/60;t2=mean(data$tps[rows])
+    t1=datagmaps$tps[i]/60;t2=mean(reddata$tps[rows])
     relvars=append(relvars,2*abs(t1-t2)/(t1+t2))
     timevar = append(timevar,min(abs(datagmaps$ts[i]-data$ts)))
   }
 }
+
+#
 
 
 ###############
