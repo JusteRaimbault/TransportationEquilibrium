@@ -1,0 +1,50 @@
+This is BibTeX, Version 0.99d (TeX Live 2015)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: trpro_ewgt16_raimbault.aux
+The style file: ../elsarticle-harv.bst
+Database file #1: ../biblio.bib
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Warning--empty journal in bouteiller2013open
+Warning--empty pages in zhu2010people
+You've used 18 entries,
+            2990 wiz_defined-function locations,
+            747 strings with 9286 characters,
+and the built_in function-call counts, 11863 in all, are:
+= -- 889
+> -- 476
+< -- 10
++ -- 187
+- -- 165
+* -- 1292
+:= -- 1738
+add.period$ -- 52
+call.type$ -- 18
+change.case$ -- 144
+chr.to.int$ -- 18
+cite$ -- 20
+duplicate$ -- 887
+empty$ -- 873
+format.name$ -- 223
+if$ -- 2175
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 172
+newline$ -- 104
+num.names$ -- 72
+pop$ -- 339
+preamble$ -- 2
+purify$ -- 127
+quote$ -- 0
+skip$ -- 246
+stack$ -- 0
+substring$ -- 512
+swap$ -- 620
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 159
+warning$ -- 2
+while$ -- 80
+width$ -- 0
+write$ -- 259
+(There were 2 warnings)
