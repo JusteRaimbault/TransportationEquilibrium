@@ -65,8 +65,8 @@ $^{2}$UMR-T IFSTTAR 9403 LVMT\\
 }
 
 
-\date{EWGT 2016\\\smallskip
-\textit{Session Transportation Modeling}\\\smallskip
+\date{EWGT 2016 - Istanbul\\\smallskip
+\textit{Session Transportation Modeling}\\\smallskip % TODO session id
 5th September 2016
 }
 
@@ -90,7 +90,7 @@ $^{2}$UMR-T IFSTTAR 9403 LVMT\\
 
 \bigskip
 
-Recent Developments :
+\textbf{Various Developments :}
 
 \medskip
 
@@ -113,13 +113,26 @@ $\rightarrow$ Assignment techniques inspired from other fields such as Network S
 
 \sframe{Validation and Practical Use}{
 
+\justify
 % 
 
-\textit{Static User Equilibrium lacks emirical validation in the literature}
+\textit{Static User Equilibrium lacks empirical validation in the literature}
 
-Behavioral study of route choices in \cite{zhu2010people}
+\medskip
 
-\cite{leurent2014user}
+$\rightarrow$ Some examples such as the behavioral study of user route choices (``Wardrop's first principle'') in \cite{zhu2010people}
+
+\bigskip
+
+\textbf{However still largely used}
+
+\medskip
+
+$\rightarrow$ in theoretical literature, as for example \cite{leurent2014user}
+
+\medskip
+
+$\rightarrow$ in real-world application, such as the MODUS model for Parisian region
 
 
 }
@@ -127,22 +140,49 @@ Behavioral study of route choices in \cite{zhu2010people}
 
 \sframe{Empirical Investigation of SUE Existence}{
 
-\textbf{Research Objective : } \textit{Investigate empirically the spatio-temporal stationarity of flows, combining different quantitative approaches} 
+\justify
+
+\textbf{Research Objective : } \textit{Investigate empirically the spatio-temporal stationarity of flows, combining different complementary quantitative approaches on a concrete dataset}
+
+\bigskip
+
+$\rightarrow$ Construction of a real-time dataset for Paris region on 6 month by data crawling
+
+\medskip
+
+$\rightarrow$ Complementarity of approaches (Complex Systems general paradigm) : Spatio-temporal data visualization, Network analysis, Spatial analysis
 
 }
 
 
 %%%%%%%%%%%%%%%%%
-\section{Results}
+\section{Methods and Results}
 %%%%%%%%%%%%%%%%%
 
 
 
-\sframe{Data Collection}{
+\sframe{Dataset Construction}{
 
 \textit{Difficulty to find Open Data on Transportation Systems \cite{bouteiller2013open}}
 
-$\rightarrow$ Construction of an open historical travel time dataset for major links in the region of Paris, collecting in real time public data from
+
+$\rightarrow$ Construction of an open historical travel time dataset for major links in the region of Paris, collecting in real time public traffic data from \texttt{www.sytadin.fr}
+
+\medskip
+
+\textbf{Data collection : } Each two minutes, automated python script
+
+\begin{itemize}
+\item fetch raw webpage giving traffic information
+\item parse html code
+\item insert all links in a \texttt{sqlite} database with the current timestamp.
+\end{itemize}
+
+\textit{Openly available (CC Licence) at }\texttt{\texttt{http://37.187.242.99/files/public/sytadin{\_}latest.sqlite3}}
+
+\medskip
+
+\textbf{Data summary : } 10 month (since Feb. 2016), 2min time granularity, effective travel time for 101 links ($\simeq$ 10km spatial granularity)
 
 
 }
@@ -153,9 +193,13 @@ $\rightarrow$ Construction of an open historical travel time dataset for major l
 
 \textit{Interactive web-application for spatio-temporal exploration}
 
-\medskip
+\texttt{http://shiny.parisgeo.cnrs.fr/transportation}
 
-\includegraphics[width=\textwidth]{figures/gr1}
+\bigskip
+
+\centering
+
+\includegraphics[width=0.9\textwidth]{figures/gr1}
 
 }
 
@@ -163,24 +207,24 @@ $\rightarrow$ Construction of an open historical travel time dataset for major l
 
 \sframe{Spatio-temporal Variability : Example}{
 
-\textit{Very high spatial variability on 10min time interval}
+\textit{Very high spatial variability on 10min time interval, here on 11/02/2016 00:06}
 
-\medskip
+\bigskip
 
-\includegraphics[width=0.47\textwidth]{figures/gr21}\hfill
-\includegraphics[width=0.47\textwidth]{figures/gr22}
+\includegraphics[width=0.5\textwidth]{figures/gr21}\hfill
+\includegraphics[width=0.5\textwidth]{figures/gr22}
 
 }
 
 
 \sframe{Spatio-temporal Variability}{
 
-\textit{Maximal travel time and spatial variabilities}
+\textit{Maximal travel time and spatial variabilities on a two week sample}
 
 \medskip
 
-\includegraphics[width=0.5\textwidth]{figures/gr31}
-\includegraphics[width=0.5\textwidth]{figures/gr32}
+\includegraphics[width=0.5\textwidth,height=0.6\textheight]{figures/gr31}
+\includegraphics[width=0.5\textwidth,height=0.6\textheight]{figures/gr32}
 
 }
 
