@@ -66,8 +66,7 @@ $^{2}$UMR-T IFSTTAR 9403 LVMT\\
 
 
 \date{EWGT 2016 - Istanbul\\\smallskip
-\textit{Session Transportation Modeling}\\\smallskip % TODO session id
-5th September 2016
+\textit{Session Transportation Modeling - MoST2-B}\\\smallskip5th September 2016
 }
 
 \frame{\maketitle}
@@ -90,7 +89,7 @@ $^{2}$UMR-T IFSTTAR 9403 LVMT\\
 
 \bigskip
 
-\textbf{Various Developments :}
+\textbf{Diverse developments :}
 
 \medskip
 
@@ -124,15 +123,16 @@ $\rightarrow$ Some examples such as the behavioral study of user route choices (
 
 \bigskip
 
+
 \textbf{However still largely used}
 
 \medskip
 
-$\rightarrow$ in theoretical literature, as for example \cite{leurent2014user}
+$\rightarrow$ in theoretical literature, as for example \cite{leurent2014user} : do refinements in the model such as adding parking cruising flows have a sense if the core is not validated ?
 
 \medskip
 
-$\rightarrow$ in real-world application, such as the MODUS model for Parisian region
+$\rightarrow$ in real-world application, such as the MODUS model for Paris Metropolitan area : what are the implications of basing decision-making and traffic management on an unvalidated framework ?
 
 
 }
@@ -142,11 +142,11 @@ $\rightarrow$ in real-world application, such as the MODUS model for Parisian re
 
 \justify
 
-\textbf{Research Objective : } \textit{Investigate empirically the spatio-temporal stationarity of flows, combining different complementary quantitative approaches on a concrete dataset}
+\textbf{Research Objective : } \textit{Investigate empirically the spatio-temporal stationarity of traffic flows, combining different complementary quantitative approaches}
 
 \bigskip
 
-$\rightarrow$ Construction of a real-time dataset for Paris region on 6 month by data crawling
+$\rightarrow$ Construction of a real-time dataset for major links of Paris region on 6 month by data crawling
 
 \medskip
 
@@ -175,7 +175,7 @@ $\rightarrow$ Construction of an open historical travel time dataset for major l
 \begin{itemize}
 \item fetch raw webpage giving traffic information
 \item parse html code
-\item insert all links in a \texttt{sqlite} database with the current timestamp.
+\item store in a \texttt{sqlite} database
 \end{itemize}
 
 \textit{Openly available (CC Licence) at }\texttt{\texttt{http://37.187.242.99/files/public/sytadin{\_}latest.sqlite3}}
@@ -207,12 +207,12 @@ $\rightarrow$ Construction of an open historical travel time dataset for major l
 
 \sframe{Spatio-temporal Variability : Example}{
 
-\textit{Very high spatial variability on 10min time interval, here on 11/02/2016 00:06}
+\textit{Very high spatial variability on 10min time interval, here on 11/02/2016 00:06-00:16}
 
 \bigskip
 
-\includegraphics[width=0.5\textwidth]{figures/gr21}\hfill
-\includegraphics[width=0.5\textwidth]{figures/gr22}
+\includegraphics[width=0.48\textwidth]{figures/gr21}\hfill
+\includegraphics[width=0.48\textwidth]{figures/gr22}
 
 }
 
@@ -221,7 +221,7 @@ $\rightarrow$ Construction of an open historical travel time dataset for major l
 
 \textit{Maximal travel time and spatial variabilities on a two week sample}
 
-\medskip
+\bigskip
 
 \includegraphics[width=0.5\textwidth,height=0.6\textheight]{figures/gr31}
 \includegraphics[width=0.5\textwidth,height=0.6\textheight]{figures/gr32}
@@ -238,37 +238,62 @@ Network Betweenness Centrality
 b_i = \frac{1}{N(N-1)}\cdot \sum_{o\neq d \in V}\mathbbm{1}_{i\in p(o\rightarrow d)}
 \end{equation}
 
-Variability
+Temporal Maximal Betweenness Variability
 
 \begin{equation}
 \Delta b(t) = \frac{\left|\max_i (b_i(t + \Delta t)) - \max_i (b_i(t))\right|}{\max_i (b_i(t))}
 \end{equation}
 
+\bigskip
+
+$\rightarrow$ \textit{Reveals either a proportion of rerouted travels (negative variation) or a minimal proportion of load increase for a single node (positive variation)}
+
 }
 
 
 \sframe{Stability of Network Measures}{
-\includegraphics[width=\textwidth]{figures/gr4}
+
+\textit{Temporal maximal betweenness variability on a two weeks period}
+
+\medskip
+
+\centering 
+
+\includegraphics[width=0.9\textwidth]{figures/gr4}
 }
 
 
 
 \sframe{Spatial Heterogeneity}{
 
-Spatial Autocorrelation as an index of spatial variability
+Spatial Autocorrelation as an index of spatial variability, for link $i$
 
 \begin{equation}
 \rho_i = \frac{1}{K}\cdot \sum_{i\neq j}{w_{ij}\cdot (c_i - \bar{c})(c_j - \bar{c})}
 \end{equation}
 
-with weights  $w_{ij} = \exp{\left(\frac{-d_{ij}}{d_0}\right)}$
+with spatial weights  $w_{ij} = \exp{\left(\frac{-d_{ij}}{d_0}\right)}$
+
+\bigskip
+\bigskip
+
+$\rightarrow$ \textit{Indirect measure of the spatial stationarity of flows : a decreasing correlation implies a chaotic system}
+
 
 }
 
 
 
 \sframe{Spatial Heterogeneity}{
-\includegraphics[width=\textwidth]{figures/moran_withCong}
+
+\textit{Spatial autocorrelation on a two weeks period for different decays}
+
+\medskip
+
+\centering
+
+\includegraphics[width=\textwidth,height=0.8\textheight]{figures/moran_withCong}
+
 }
 
 
@@ -279,30 +304,43 @@ with weights  $w_{ij} = \exp{\left(\frac{-d_{ij}}{d_0}\right)}$
 
 \sframe{Theoretical and Practical Implications}{
 
+\justify
+
 \textbf{Theoretical Implications}
 
-$\rightarrow$ Need for more systematic comparison of framework validity : multi-modeling. \cite{kryvobokov2013comparison} compares two LUTI models
+\medskip
+
+$\rightarrow$ Need for more systematic comparison of framework validity
+
+(\cite{kryvobokov2013comparison} compares two LUTI models e.g.)
+
+\medskip
 
 $\rightarrow$ Can still be used e.g. for integration within more complex models
 
 \bigskip
+\bigskip
 
 \textbf{Practical Implications}
 
-$\rightarrow$
+\medskip
+
+$\rightarrow$ Difficulty of transferring academic results to real-world engineering, that can be tied to habits, myths, political interests, etc.~\cite{commenges2013invention} ; \cite{offner1993effets}
 
 
 }
 
 
 
-\sframe{Explanative Interpretations}{
+%\sframe{Explanative Interpretations}{
 
+% - not really interesting -
 
-}
+%}
 
 
 \sframe{Possible Developments}{
+
 
 
 }
