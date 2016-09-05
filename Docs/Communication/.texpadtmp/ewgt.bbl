@@ -14,6 +14,17 @@ Commenges, H. (2013).
   instruments of economics of transportation.
 \newblock {\em Theses, Universit{\'e} Paris-Diderot-Paris VII}.
 
+\bibitem[{Cottineau}, 2016]{2016arXiv160606162C}
+{Cottineau}, C. (2016).
+\newblock {MetaZipf. (Re)producing knowledge about city size distributions}.
+\newblock {\em ArXiv e-prints}.
+
+\bibitem[Goldhirsch et~al., 1987]{goldhirsch1987stability}
+Goldhirsch, I., Sulem, P.-L., and Orszag, S.~A. (1987).
+\newblock Stability and lyapunov stability of dynamical systems: A differential
+  approach and a numerical method.
+\newblock {\em Physica D: Nonlinear Phenomena}, 27(3):311--337.
+
 \bibitem[Han, 2003]{han2003dynamic}
 Han, S. (2003).
 \newblock Dynamic traffic modelling and dynamic stochastic user equilibrium
@@ -58,6 +69,11 @@ Rasmussen, T.~K., Watling, D.~P., Prato, C.~G., and Nielsen, O.~A. (2015).
 \newblock Stochastic user equilibrium with equilibrated choice sets: Part
   ii--solving the restricted sue for the logit family.
 \newblock {\em Transportation Research Part B: Methodological}, 77:146--165.
+
+\bibitem[Tordeux and Lassarre, 2016]{tordeux2016jam}
+Tordeux, A. and Lassarre, S. (2016).
+\newblock Jam avoidance with autonomous systems.
+\newblock {\em arXiv preprint arXiv:1601.07713}.
 
 \bibitem[Wardrop, 1952]{wardrop1952road}
 Wardrop, J.~G. (1952).
