@@ -70,8 +70,8 @@ graphDistances<-function(gg){
 
 constructGraph<-function(data,roads,times,time){
   show(length(roads));show(dim(data));show(length(times));show(time)
-  #lstrip <- function (x)  gsub("^\\s+", "", x)
-  lstrip <- function (x)  gsub(" ", "", x)
+  lstrip <- function (x)  gsub("^\\t+", "", x)
+  #lstrip <- function (x)  gsub(" ", "", x)
   nodes = sapply(unlist(sapply(data$troncon[roads@data$id],function(s){strsplit(strsplit(lstrip(s),"_")[[1]][1],"=")})),function(s){strsplit(s,"(",fixed=TRUE)[[1]][1]})
   # get coordinates : need extremities of roads
   vdf = data.frame();edgelengths=c()
