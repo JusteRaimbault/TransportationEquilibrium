@@ -71,6 +71,8 @@ graphDistances<-function(gg){
 constructGraph<-function(data,roads,times,time){
   show(length(roads));show(dim(data));show(length(times));show(time)
   lstrip <- function (x)  gsub("^\\t+", "", x)
+  #show(length(roads));show(dim(data));show(length(times));show(time)
+  #lstrip <- function (x)  gsub("^\\s+", "", x) # change depending UNIX system
   #lstrip <- function (x)  gsub(" ", "", x)
   nodes = sapply(unlist(sapply(data$troncon[roads@data$id],function(s){strsplit(strsplit(lstrip(s),"_")[[1]][1],"=")})),function(s){strsplit(s,"(",fixed=TRUE)[[1]][1]})
   # get coordinates : need extremities of roads
@@ -141,7 +143,7 @@ addSegment<-function(edf,o,d,c,l,t){
 }
 
 cutSegment<-function(edf,vdf,e1,e2,en){
-  show(edf[,1])  
+ # show(edf[,1])  
 # recompute distances : need vertices coordinates
   d1 = spDists(x=matrix(c(vdf[which(vdf$ID==e1),2:3],vdf[which(vdf$ID==en),2:3]),ncol=2,byrow = TRUE),longlat = TRUE,segments = TRUE)
   d2 = spDists(x=matrix(c(vdf[which(vdf$ID==e2),2:3],vdf[which(vdf$ID==en),2:3]),ncol=2,byrow = TRUE),longlat = TRUE,segments = TRUE)
@@ -149,8 +151,8 @@ cutSegment<-function(edf,vdf,e1,e2,en){
   r1 = which(edf[,1]==e1&edf[,2]==e2)[1]
   r2 = which(edf[,1]==e2&edf[,2]==e1)[1]
   d = as.numeric(edf[r1,4])
-  show(r1);show(r2)
-  show(d)
+  #show(r1);show(r2)
+  #show(d)
   cong12=edf[r1,3];cong21=edf[r2,3];
   t12=as.numeric(edf[r1,5]);t21=as.numeric(edf[r2,5]);
   edf[r1,]<- c(e1,en,cong12,d1,t12*d1/d)

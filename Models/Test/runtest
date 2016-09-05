@@ -1,2 +1,3 @@
 cd /root/ComplexSystems/TransportationEquilibrium/Models/Test
-python -W ignore test.py
+#python -W ignore test.py
+python test.py
