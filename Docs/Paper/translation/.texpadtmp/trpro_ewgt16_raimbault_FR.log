@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99996 (TeX Live 2016) (preloaded format=xelatex 2016.12.16)  19 DEC 2016 18:03
+This is XeTeX, Version 3.14159265-2.6-0.99996 (TeX Live 2016) (preloaded format=xelatex 2016.12.16)  19 DEC 2016 21:35
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -462,38 +462,77 @@ Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
  (/usr/local/texlive/2016/texmf-dist/tex/latex/base/t1enc.def
 File: t1enc.def 2005/09/27 v1.99g Standard LaTeX file
 LaTeX Font Info:    Redeclaring font encoding T1 on input line 48.
-)) (/Users/Juste/Documents/ComplexSystems/TransportationEquilibrium/Docs/Paper/translation/.texpadtmp/trpro_ewgt16_raimbault_FR.aux)
+)) (/usr/local/texlive/2016/texmf-dist/tex/generic/babel/babel.sty
+Package: babel 2016/04/23 3.9r The Babel package
+ (/usr/local/texlive/2016/texmf-dist/tex/generic/babel-french/frenchb.ldf
+Language: frenchb 2016/05/14 v3.2c French support from the babel system
+ (/usr/local/texlive/2016/texmf-dist/tex/generic/babel/babel.def
+File: babel.def 2016/04/23 3.9r Babel common definitions
+\babel@savecnt=\count98
+\U@D=\dimen122
+ (/usr/local/texlive/2016/texmf-dist/tex/generic/babel/xebabel.def))
+\l@acadian = a dialect from \language\l@french 
+\l@canadien = a dialect from \language\l@french 
+\FB@nonchar=\count99
+\FBcolonskip=\skip59
+\FBthinskip=\skip60
+Package frenchb.ldf Info: No need for active punctuation characters
+(frenchb.ldf)             with this version of XeTeX!
+(frenchb.ldf)             reported on input line 277.
+\FB@punctthick=\XeTeXcharclass1
+\FB@punctthin=\XeTeXcharclass2
+\FB@punctnul=\XeTeXcharclass3
+\FB@guilo=\XeTeXcharclass4
+\FB@guilf=\XeTeXcharclass5
+\FB@guilnul=\XeTeXcharclass6
+\FBguillskip=\skip61
+\FBguill@level=\count100
+\FB@everypar=\toks22
+\FB@Mht=\dimen123
+LaTeX Info: Redefining \degres on input line 729.
+\std@mcc=\count101
+\dec@mcc=\count102
+\listindentFB=\skip62
+\labelwidthFB=\skip63
+\leftmarginFB=\skip64
+\parindentFFN=\dimen124
+\FBfnindent=\skip65
+)) (/usr/local/texlive/2016/texmf-dist/tex/latex/carlisle/scalefnt.sty) (/Users/Juste/Documents/ComplexSystems/TransportationEquilibrium/Docs/Paper/translation/.texpadtmp/trpro_ewgt16_raimbault_FR.aux
+
+LaTeX Warning: Label `fig:fig-3' multiply defined.
+
+)
 \openout1 = `trpro_ewgt16_raimbault_FR.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/txmi/m/it on input line 135.
-LaTeX Font Info:    Try loading font information for OML+txmi on input line 135.
+LaTeX Font Info:    Checking defaults for OML/txmi/m/it on input line 139.
+LaTeX Font Info:    Try loading font information for OML+txmi on input line 139.
  (/usr/local/texlive/2016/texmf-dist/tex/latex/txfonts/omltxmi.fd
 File: omltxmi.fd 2000/12/15 v3.1
 )
-LaTeX Font Info:    ... okay on input line 135.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 135.
-LaTeX Font Info:    ... okay on input line 135.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 135.
-LaTeX Font Info:    ... okay on input line 135.
-LaTeX Font Info:    Checking defaults for OMS/txsy/m/n on input line 135.
-LaTeX Font Info:    Try loading font information for OMS+txsy on input line 135.
+LaTeX Font Info:    ... okay on input line 139.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 139.
+LaTeX Font Info:    ... okay on input line 139.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 139.
+LaTeX Font Info:    ... okay on input line 139.
+LaTeX Font Info:    Checking defaults for OMS/txsy/m/n on input line 139.
+LaTeX Font Info:    Try loading font information for OMS+txsy on input line 139.
  (/usr/local/texlive/2016/texmf-dist/tex/latex/txfonts/omstxsy.fd
 File: omstxsy.fd 2000/12/15 v3.1
 )
-LaTeX Font Info:    ... okay on input line 135.
-LaTeX Font Info:    Checking defaults for OMX/txex/m/n on input line 135.
-LaTeX Font Info:    Try loading font information for OMX+txex on input line 135.
+LaTeX Font Info:    ... okay on input line 139.
+LaTeX Font Info:    Checking defaults for OMX/txex/m/n on input line 139.
+LaTeX Font Info:    Try loading font information for OMX+txex on input line 139.
  (/usr/local/texlive/2016/texmf-dist/tex/latex/txfonts/omxtxex.fd
 File: omxtxex.fd 2000/12/15 v3.1
 )
-LaTeX Font Info:    ... okay on input line 135.
-LaTeX Font Info:    Checking defaults for U/txexa/m/n on input line 135.
-LaTeX Font Info:    Try loading font information for U+txexa on input line 135.
+LaTeX Font Info:    ... okay on input line 139.
+LaTeX Font Info:    Checking defaults for U/txexa/m/n on input line 139.
+LaTeX Font Info:    Try loading font information for U+txexa on input line 139.
  (/usr/local/texlive/2016/texmf-dist/tex/latex/txfonts/utxexa.fd
 File: utxexa.fd 2000/12/15 v3.1
 )
-LaTeX Font Info:    ... okay on input line 135.
-LaTeX Font Info:    Try loading font information for T1+txr on input line 135.
+LaTeX Font Info:    ... okay on input line 139.
+LaTeX Font Info:    Try loading font information for T1+txr on input line 139.
  (/usr/local/texlive/2016/texmf-dist/tex/latex/txfonts/t1txr.fd
 File: t1txr.fd 2000/12/15 v3.1
 )
@@ -533,42 +572,48 @@ File: t1txr.fd 2000/12/15 v3.1
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Font Info:    Try loading font information for OMS+txr on input line 183.
+LaTeX Info: Redefining \dots on input line 139.
+LaTeX Info: Redefining \up on input line 139.
+
+Package frenchb.ldf Warning: Add \usepackage{fontspec} to the
+(frenchb.ldf)                preamble of your document, on input line 139.
+
+LaTeX Font Info:    Try loading font information for OMS+txr on input line 187.
 (/usr/local/texlive/2016/texmf-dist/tex/latex/txfonts/omstxr.fd
 File: omstxr.fd 2000/12/15 v3.1
 )
 LaTeX Font Info:    Font shape `OMS/txr/m/n' in size <9> not available
-(Font)              Font shape `OMS/txsy/m/n' tried instead on input line 183.
-LaTeX Font Info:    Calculating math sizes for size <13> on input line 198.
-LaTeX Font Info:    Try loading font information for OT1+txr on input line 198.
+(Font)              Font shape `OMS/txsy/m/n' tried instead on input line 187.
+LaTeX Font Info:    Calculating math sizes for size <13> on input line 202.
+LaTeX Font Info:    Try loading font information for OT1+txr on input line 202.
  (/usr/local/texlive/2016/texmf-dist/tex/latex/txfonts/ot1txr.fd
 File: ot1txr.fd 2000/12/15 v3.1
 )
-LaTeX Font Info:    Try loading font information for U+txmia on input line 198.
+LaTeX Font Info:    Try loading font information for U+txmia on input line 202.
  (/usr/local/texlive/2016/texmf-dist/tex/latex/txfonts/utxmia.fd
 File: utxmia.fd 2000/12/15 v3.1
 )
-LaTeX Font Info:    Try loading font information for U+msa on input line 198.
+LaTeX Font Info:    Try loading font information for U+msa on input line 202.
  (/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 198.
+LaTeX Font Info:    Try loading font information for U+msb on input line 202.
  (/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for U+txsyc on input line 198.
+LaTeX Font Info:    Try loading font information for U+txsyc on input line 202.
  (/usr/local/texlive/2016/texmf-dist/tex/latex/txfonts/utxsyc.fd
 File: utxsyc.fd 2000/12/15 v3.1
 )
-LaTeX Font Info:    Calculating math sizes for size <9.09996> on input line 198.
+LaTeX Font Info:    Calculating math sizes for size <9.09996> on input line 202.
 File: elsevier-logo-3p.pdf Graphic file (type QTm)
  <use  "elsevier-logo-3p.pdf" >
-LaTeX Font Info:    Try loading font information for T1+txss on input line 218.
+LaTeX Font Info:    Try loading font information for T1+txss on input line 222.
  (/usr/local/texlive/2016/texmf-dist/tex/latex/txfonts/t1txss.fd
 File: t1txss.fd 2000/12/15 v3.1
 )
 LaTeX Font Info:    Font shape `T1/txss/m/n' will be
-(Font)              scaled to size 8.54997pt on input line 218.
+(Font)              scaled to size 8.54997pt on input line 222.
 File: svsd-3p.pdf Graphic file (type QTm)
  <use  "svsd-3p.pdf" >
 File: trptro.pdf Graphic file (type QTm)
@@ -596,19 +641,19 @@ Overfull \hbox (2.44003pt too wide) has occurred while \output is active
 Overfull \vbox (52.93599pt too high) has occurred while \output is active []
 
 LaTeX Font Info:    Font shape `OMS/txr/m/n' in size <8> not available
-(Font)              Font shape `OMS/txsy/m/n' tried instead on input line 218.
+(Font)              Font shape `OMS/txsy/m/n' tried instead on input line 222.
 
 Overfull \vbox (25.4pt too high) has occurred while \output is active []
 
  [1
 
 ]
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 235.
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 239.
  (/usr/local/texlive/2016/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    Font shape `OMS/txr/m/n' in size <10> not available
-(Font)              Font shape `OMS/txsy/m/n' tried instead on input line 237.
+Underfull \vbox (badness 1960) has occurred while \output is active []
+
  [2]
 File: gr1.png Graphic file (type QTm)
  <use  "gr1.png" > [3]
@@ -620,24 +665,31 @@ File: gr31.png Graphic file (type QTm)
  <use  "gr31.png" >
 File: gr32.png Graphic file (type QTm)
  <use  "gr32.png" >
-LaTeX Font Info:    Try loading font information for U+bbm on input line 330.
+LaTeX Font Info:    Try loading font information for U+bbm on input line 336.
  (/usr/local/texlive/2016/texmf-dist/tex/latex/bbm-macros/ubbm.fd
 File: ubbm.fd 1999/03/15 V 1.2 Font definition for bbm font - TH
 ) [4]
 File: gr4.png Graphic file (type QTm)
- <use  "gr4.png" > [5]
+ <use  "gr4.png" > [5] [6]
 File: gr5.png Graphic file (type QTm)
- <use  "gr5.png" >
-Underfull \vbox (badness 10000) has occurred while \output is active []
+ <use  "gr5.png" > [7]
+Underfull \vbox (badness 3623) has occurred while \output is active []
 
- [6] [7] [8] (./trpro_ewgt16_raimbault_FR.bbl [9]) [10] (/Users/Juste/Documents/ComplexSystems/TransportationEquilibrium/Docs/Paper/translation/.texpadtmp/trpro_ewgt16_raimbault_FR.aux) ) 
+ [8] (./trpro_ewgt16_raimbault_FR.bbl
+Underfull \vbox (badness 1112) has occurred while \output is active []
+
+ [9]) [10] (/Users/Juste/Documents/ComplexSystems/TransportationEquilibrium/Docs/Paper/translation/.texpadtmp/trpro_ewgt16_raimbault_FR.aux)
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
 Here is how much of TeX's memory you used:
- 3406 strings out of 493591
- 44895 string characters out of 6143545
- 101649 words of memory out of 5000000
- 6712 multiletter control sequences out of 15000+600000
- 66124 words of font info for 139 fonts, out of 8000000 for 9000
+ 4404 strings out of 493591
+ 59366 string characters out of 6143545
+ 126301 words of memory out of 5000000
+ 7689 multiletter control sequences out of 15000+600000
+ 70277 words of font info for 140 fonts, out of 8000000 for 9000
  1347 hyphenation exceptions out of 8191
- 34i,14n,34p,2751b,313s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 34i,14n,34p,2751b,319s stack positions out of 5000i,500n,10000p,200000b,80000s
 
 Output written on /Users/Juste/Documents/ComplexSystems/TransportationEquilibrium/Docs/Paper/translation/.texpadtmp/trpro_ewgt16_raimbault_FR.pdf (10 pages).
