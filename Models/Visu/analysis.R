@@ -1,10 +1,12 @@
 
-setwd(paste0(Sys.getenv('CS_HOME'),'/TransportationEquilibrium/Models/Visu'))
+#setwd(paste0(Sys.getenv('CS_HOME'),'/TransportationEquilibrium/Models/Visu'))
+setwd('/home/raimbault/ComplexSystems/TransportationEquilibrium/Models/Visu')
 
 source('functions.R')
 
 
-db = dbConnect(SQLite(),"../../Data/Sytadin/data/sytadin_20160703.sqlite3")
+#db = dbConnect(SQLite(),"../../Data/Sytadin/data/sytadin_20160703.sqlite3")
+db = dbConnect(SQLite(),"../../Data/Data/traffic_20160201-20160301.sqlite3")
 data = dbGetQuery(db,'SELECT * FROM data;') #WHERE ts > 1466545462;')
 
 source('prepareData.R')
@@ -29,6 +31,29 @@ for(i in 1:nrow(datagmaps)){
 }
 
 #
+
+
+# overall congestion
+congdata<-data %>% mutate(mintps=rep(mintps$mintps,nrow(data)/148))%>%mutate(congestion=1 - (mintps / (tps+1)))%>%group_by(ts)%>%summarise(
+  mcong=mean(congestion),mincong=mean(congestion)-sd(congestion),maxcong=mean(congestion)+sd(congestion)
+)
+
+
+
+#################
+## Basic stats on data
+
+library(ggplot2)
+
+sdata = data[data$ts<min(data$ts)+86400*7,] %>% group_by(ts)%>%summarise(avgtime=mean((tps-tps_th)/(1+tps_th)))
+g=ggplot(sdata,aes(x=ts,y=avgtime))
+g+geom_line()
+
+
+g=ggplot(congdata[congdata$ts<min(congdata$ts)+86400*14,],aes(x=ts,y=mcong))
+g+geom_line()+
+  geom_vline(xintercept=(seq(from=1454371200,to=1455553681,by=86400)),color='red',linetype=2)+xlab("time")+ylab("congestion")
+ggsave(file = '../../Results/Stats/congestion.png')
 
 
 ###############
@@ -76,10 +101,7 @@ library(ggplot2)
 
 # first midnight of data : 1454371201 = 02/02/2016 00:00:01
 
-# overall congestion
-congdata<-data %>% mutate(mintps=rep(mintps$mintps,nrow(data)/148))%>%mutate(congestion=1 - (mintps / (tps+1)))%>%group_by(ts)%>%summarise(
-  mcong=mean(congestion),mincong=mean(congestion)-sd(congestion),maxcong=mean(congestion)+sd(congestion)
-)
+
 
 decaysplot = c(1,5,10,20)
 indexes=which(ddecays%in%decaysplot)
