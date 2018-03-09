@@ -1,8 +1,9 @@
 
-#setwd(paste0(Sys.getenv('CS_HOME'),'/TransportationEquilibrium/Models/Visu'))
-setwd('/home/raimbault/ComplexSystems/TransportationEquilibrium/Models/Visu')
+setwd(paste0(Sys.getenv('CS_HOME'),'/TransportationEquilibrium/Models/Visu'))
+#setwd('/home/raimbault/ComplexSystems/TransportationEquilibrium/Models/Visu')
 
 source('functions.R')
+source(paste0(Sys.getenv('CN_HOME'),'/Models/Utils/R/plots.R'))
 
 
 #db = dbConnect(SQLite(),"../../Data/Sytadin/data/sytadin_20160703.sqlite3")
@@ -38,6 +39,7 @@ congdata<-data %>% mutate(mintps=rep(mintps$mintps,nrow(data)/148))%>%mutate(con
   mcong=mean(congestion),mincong=mean(congestion)-sd(congestion),maxcong=mean(congestion)+sd(congestion)
 )
 
+reldata<- data %>% mutate(mintps=rep(mintps$mintps,nrow(data)/148))%>%mutate(reltime= (tps+1)/mintps)
 
 
 #################
@@ -50,10 +52,31 @@ g=ggplot(sdata,aes(x=ts,y=avgtime))
 g+geom_line()
 
 
-g=ggplot(congdata[congdata$ts<min(congdata$ts)+86400*14,],aes(x=ts,y=mcong))
+g=ggplot(congdata[congdata$ts<min(congdata$ts)+86400*14,],aes(x=as.POSIXct(ts,origin="1960-01-01"),y=mcong))
 g+geom_line()+
-  geom_vline(xintercept=(seq(from=1454371200,to=1455553681,by=86400)),color='red',linetype=2)+xlab("time")+ylab("congestion")
-ggsave(file = '../../Results/Stats/congestion.png')
+  geom_vline(xintercept=(as.POSIXct(seq(from=1454371200,to=1455553681,by=86400),origin="1960-01-01")),color='red',linetype=2)+
+  scale_x_datetime()+
+  xlab("time")+ylab("congestion")+stdtheme
+ggsave(file = '../../Results/Stats/congestion.png',width=30,height=20,units='cm')
+
+
+g=ggplot(reldata,aes(x=reltime))
+g+geom_histogram(bins = 30)+scale_x_log10()+xlab("log(relative time)")+stdtheme
+ggsave(file='../../Results/Stats/reltime.png',width=30,height=20,units='cm')
+
+# same with rank size law
+g=ggplot(reldata[reldata$reltime>3,],aes(x=log(1:length(which(reltime>3))),y=sort(log(reltime),decreasing = T)))
+g+geom_point(pch='.')+geom_smooth()+xlab("log(rank)")+ylab("log(relative time)")+stdtheme
+ggsave(file='../../Results/Stats/reltime_ranksize.png',width=30,height=20,units='cm')
+
+
+g=ggplot(reldata,aes(x=reltime,colour=as.character(id)))
+g+geom_density()+scale_x_log10()+scale_colour_discrete(guide=F)+xlab("log(relative time)")+stdtheme
+ggsave(file='../../Results/Stats/reltime_bylink.png',width=30,height=20,units='cm')
+
+g=ggplot(reldata[reldata$reltime>3,],aes(x=log(1:length(which(reltime>3))),y=sort(log(reltime),decreasing = T),colour=as.character(id)))
+g+geom_point(pch='.')+geom_smooth()+xlab("log(rank)")+ylab("log(relative time)")
+
 
 
 ###############
@@ -147,7 +170,7 @@ bdf  =as.tbl(betweennessesdf)%>% group_by(btimes)%>%summarise(bmax=max(abs(betwe
 bdf=data.frame(dates=dates[indexes],relvar=abs(bdf[2:nrow(bdf),2]-bdf[1:(nrow(bdf)-1),2])/bdf[1:(nrow(bdf)-1),2])
 g=ggplot(bdf)
 g+geom_line(aes_string("dates","bmax"),colour="lightskyblue3")+stat_smooth(se = FALSE) + theme(axis.text.x = element_text(angle = 90,size=20),axis.text.y=element_text(size=20))+
-    xlab("time")+ylab("|∆b| / b")
+    xlab("time")+ylab("|???b| / b")
 
 
 

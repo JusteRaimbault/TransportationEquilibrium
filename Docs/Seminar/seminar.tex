@@ -66,7 +66,7 @@ $^{2}$UMR CNRS 8504 G{\'e}ographie-cit{\'e}s\\
 
 
 \date{Smart mobility master\\\smallskip
-\textit{Modeling Transportation Networks}\\\smallskip 9th March 2018
+\textit{Modeling Traffic and Transportation Networks}\\\smallskip March 9th 2018
 } 
 
 \frame{\maketitle}
@@ -79,13 +79,110 @@ $^{2}$UMR CNRS 8504 G{\'e}ographie-cit{\'e}s\\
 
 
 
+\sframe{What is congestion ?}{
+
+Negative externalities and conjunction of aggregation and dispersion forces in territorial systems \cite{fujita1996economics}. 
+
+\bigskip
+
+$\rightarrow$ \textit{Congestion is when the volume of use exceeds the infrastructure/system capacity}
+
+\bigskip
+
+\textbf{Examples: } traffic congestion, pedestrian congestion, public transport congestion, real estate market congestion, logistic supply congestion, etc.
+
+}
+
+\sframe{Congestion in territorial systems}{
+
+\justify
+
+
+\vspace{-0.5cm}
+Crucial role in the evolution of an urban system, at several scales: example of the land-use/transport feedback cycle from \cite{wegener2004land}
+
+\centering
+
+\includegraphics[width=0.7\textwidth]{figures/wegener.png}
+
+}
+
+\sframe{Measures for the congestion of traffic}{
+
+% theorey on congestion : free flows, bpr, fundamental diagram of traffic
+
+Various approaches to measure traffic congestion \cite{rao2012measuring} :
+
+\begin{itemize}
+	\item current average speed
+	\item travel time and delay (associated accessibility indices)
+	\item volumes of vehicles
+	\item level of service
+	\item capacity of the network to answer demand
+	\item generalized costs increase
+\end{itemize}
+
+
+}
+
+
+
+\sframe{Traffic fundamental diagram}{
+
+Fundamental relation between vehicle density and flow : free flow, critical phase, congested phase.
+
+\bigskip
+
+\textit{Theoretical and empirical example from \cite{daganzo2008analytical}}
+
+\medskip
+
+\includegraphics[width=0.48\textwidth]{figures/funddiagth.png}
+\includegraphics[width=0.48\textwidth]{figures/funddiagemp.png}
+
+}
+
+
+
+\sframe{Traffic phase diagram}{
+
+Example of theoretical and empirical phases in a ramp configuration \cite{treiber2010three}
+
+\medskip
+
+\includegraphics[width=\textwidth]{figures/trafficphases.png}
+
+}
+
+
+
+
 \sframe{Traffic Modeling : User Equilibrium Frameworks}{
 
 \justify
 
 % from static user eq to recent theoretical framework
 
-\textit{Equilibrium frameworks central in Transportation Research since Wardrop \cite{wardrop1952road}}
+\textbf{Transportation network model: } graph with edges flows and capacity.
+
+\medskip
+
+\textbf{Question: } How to compute traffic flows from a demand pattern ?
+
+$\rightarrow$ \textit{Traffic assignment problem}
+
+\medskip
+
+\begin{enumerate}
+	\item Basic solution: shortest path assignment (betweenness centrality)
+	\item More elaborate: user equilibrium at which no user can improve his travel time, coined by \cite{wardrop1952road} (game theory approach: similar to a Nash equilibrium)
+	\begin{itemize}
+		\item mathematical existence generally verified (fixed point theorem), unicity more difficult
+		\item temporal stationarity assumption: flows are assumed to converge on the considered period, generally rush hour
+	\end{itemize}
+\end{enumerate}
+
+%\textit{Equilibrium frameworks central in Transportation Research since Wardrop }
 
 
 
@@ -102,6 +199,8 @@ $^{2}$UMR CNRS 8504 G{\'e}ographie-cit{\'e}s\\
 
 
 
+
+\sframe{Extensions of Wardrop's equilibrium}{
 
 \bigskip
 
@@ -155,14 +254,6 @@ $\rightarrow$ in real-world application, such as the MODUS model for Paris Metro
 
 
 
-\sframe{Measures of congestion}{
-
-% theorey on congestion : free flows, bpr, fundamental diagram of traffic
-
-
-
-}
-
 
 
 
@@ -189,12 +280,13 @@ $\rightarrow$ Complementarity of approaches (Complex Systems general paradigm) :
 %%%%%%%%%%%%%%%%%
 
 
-\jframe{Collecte des donn{\'e}es}{
-\textit{Crawling de donn{\'e}es semi-ouvertes : exemples en g{\'e}ographie}
+\sframe{Data collection: illustration}{
+\textit{Crawling of semi-open data may be necessary to study territorial systems}
 
 \bigskip
 
-Donn{\'e}es de mobilit{\'e} : statuts des stations Vlib en temps r{\'e}el (API)
+
+\textbf{Mobility data:} status of VLib stations in real time (easy: API)
 
 \cite{raimbault2015user}
 
@@ -209,14 +301,42 @@ Donn{\'e}es de mobilit{\'e} : statuts des stations Vlib en temps r{\'e}el (API)
 
 
 
-\jframe{Collecte des donn{\'e}es}{
+\sframe{Data collection}{
+
+More difficult mobility data: dockless bike sharing. Evaluation of an ad-hoc algorithm.
+
+\medskip
+
+\centering
+
+\includegraphics[width=0.48\textwidth]{figures/gobee_buffer.png}\includegraphics[width=0.48\textwidth]{figures/gobee_resol.png}
 
 
-\textbf{Donn{\'e}es de citation} : revue non r{\'e}f{\'e}renc{\'e}e par base ``classiques'' (de plus non libres !)
+}
+
+\sframe{Data collection}{
+Even more difficult: ad-hoc algorithm and large scale data (150000 records every 12 hours). Example of US gaz prices.
+
+\medskip
+
+\centering
+
+\includegraphics[width=0.8\textwidth]{figures/average_regular_map.png}
+
+}
+
+
+\sframe{Data collection}{
+
+\textit{Not only for spatial data}
+
+\medskip
+
+\textbf{Paper citation data}: example of a journal not referenced by classical databases
 
 \bigskip
 
-$\rightarrow$ \textit{crawling} de \texttt{google scholar} par utilisation de l'option ``\textit{cit{\'e} par}'' \cite{noruzi2005google}
+%$\rightarrow$ \textit{crawling} de \texttt{google scholar} par utilisation de l'option ``\textit{cit{\'e} par}'' \cite{noruzi2005google}
 
 
 \centering
@@ -248,11 +368,11 @@ $\rightarrow$ Construction of an open historical travel time dataset for major l
 \item store in a \texttt{sqlite} database
 \end{itemize}
 
-\textit{Openly available (CC Licence) at }\texttt{\texttt{http://37.187.242.99/files/public/sytadin{\_}latest.sqlite3}}
+\textit{Openly available (CC Licence) at }\url{http://dx.doi.org/10.7910/DVN/X22ODA}
 
 \medskip
 
-\textbf{Data summary : } 10 month (since Feb. 2016), 2min time granularity, effective travel time for 101 links ($\simeq$ 10km spatial granularity)
+\textbf{Data summary: } more than 2 years (since Feb. 2016), 2min time granularity, effective travel time for 101 links ($\simeq$ 10km spatial granularity)
 
 
 }
@@ -271,8 +391,54 @@ $\rightarrow$ Construction of an open historical travel time dataset for major l
 
 \includegraphics[width=0.9\textwidth]{figures/gr1}
 
+\smallskip
+
+\footnotesize\textit{Demonstration of the interactive application}
+
 }
 
+
+\sframe{Temporal patterns of congestion}{
+
+
+\includegraphics[width=\textwidth]{figures/congestion.png}
+
+}
+
+
+\sframe{Summary statistics}{
+
+\textit{Distribution of relative times}
+
+\medskip
+\centering
+
+\includegraphics[width=0.85\textwidth]{figures/reltime.png}
+
+}
+
+
+\sframe{Summary statistics}{
+
+\textit{Rank size law for relative times: signature of a complex system with extreme events}
+\centering
+\medskip
+
+\includegraphics[width=0.85\textwidth]{figures/reltime_ranksize.png}
+
+}
+
+\sframe{Summary statistics}{
+
+\textit{Distribution of relative times by link: identification of critical links}
+
+\medskip
+\centering
+
+\includegraphics[width=0.9\textwidth]{figures/reltime_bylink.png}
+
+
+}
 
 
 \sframe{Spatio-temporal Variability : Example}{
@@ -408,40 +574,27 @@ $\rightarrow$ Difficulty of transferring academic results to real-world engineer
 
 %}
 
-
-\sframe{Possible Developments}{
-
-\justify
-
-\textbf{1. Further assessment of chaotic nature of traffic flows}
-
-\medskip
-
-$\rightarrow$ Study of spatio-temporal properties of Liapounov exponents
-
-\cite{goldhirsch1987stability}, recently used in transportation research
-
-\cite{tordeux2016jam}
-
-\medskip
-
-$\rightarrow$ Additional features for spatio-temporal data exploration : Kernel smoothing for wave visualization, localized plots, etc.
-
-
-\bigskip
-
-\textbf{2. Systematization of empirical assessment ; generic benchmarks for frameworks/model}
-
-\medskip
-
-$\rightarrow$ Similar use of a web-application for users to crowd-source their model/data as e.g. \cite{2016arXiv160606162C}
-
-
-}
+%
+%\sframe{Possible Developments}{
+%\justify
+%\textbf{1. Further assessment of chaotic nature of traffic flows}
+%\medskip
+%$\rightarrow$ Study of spatio-temporal properties of Liapounov exponents
+%\cite{goldhirsch1987stability}, recently used in transportation research
+%\cite{tordeux2016jam}
+%\medskip
+%$\rightarrow$ Additional features for spatio-temporal data exploration : Kernel smoothing for wave visualization, localized plots, etc.
+%\bigskip
+%\textbf{2. Systematization of empirical assessment ; generic benchmarks for frameworks/model}
+%\medskip
+%$\rightarrow$ Similar use of a web-application for users to crowd-source their model/data as e.g. \cite{2016arXiv160606162C}
+%}
 
 
 
 \sframe{Conclusion}{
+
+\justify
 
 $\rightarrow$ Simple but necessary empirical insights into SUE spatio-temporal stationarity
 
@@ -455,15 +608,13 @@ $\rightarrow$ Strong need for more integrated research : theoretical-empirical, 
 
 
 \bigskip
-\bigskip
-\bigskip
 
 
-\footnotesize{ - All code available at \texttt{https://github.com/JusteRaimbault/TransportationEquilibrium}
+\footnotesize{ - All code available at \\\url{https://github.com/JusteRaimbault/TransportationEquilibrium}
 
-\medskip
+ - Latest version of the dataset available at \\\url{http://dx.doi.org/10.7910/DVN/X22ODA}
 
- - Paper preprint available at \texttt{http://arxiv.org/abs/1608.05266}
+ - Paper: \cite{raimbault2017investigating}, open version available at \\\url{http://arxiv.org/abs/1608.05266}
 }
 
 }
@@ -477,7 +628,7 @@ $\rightarrow$ Strong need for more integrated research : theoretical-empirical, 
 \begin{frame}[allowframebreaks]
 \frametitle{References}
 \bibliographystyle{apalike}
-\bibliography{/Users/Juste/Documents/ComplexSystems/CityNetwork/Biblio/Bibtex/CityNetwork,biblio}
+\bibliography{/Users/juste/ComplexSystems/CityNetwork/Biblio/Bibtex/CityNetwork,/Users/juste/ComplexSystems/CityNetwork/Biblio/Bibtex/selfcit,biblio}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
