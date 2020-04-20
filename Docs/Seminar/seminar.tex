@@ -1,0 +1,658 @@
+\documentclass[english,11pt]{beamer}
+
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\E}{\mathbb{E}}
+\DeclareMathOperator{\Proba}{\mathbb{P}}
+
+\newcommand{\Covb}[2]{\ensuremath{\Cov\!\left[#1,#2\right]}}
+\newcommand{\Eb}[1]{\ensuremath{\E\!\left[#1\right]}}
+\newcommand{\Pb}[1]{\ensuremath{\Proba\!\left[#1\right]}}
+\newcommand{\Varb}[1]{\ensuremath{\Var\!\left[#1\right]}}
+
+% norm
+\newcommand{\norm}[1]{\| #1 \|}
+
+\newcommand{\indep}{\rotatebox[origin=c]{90}{$\models$}}
+
+
+
+
+
+\usepackage{mathptmx,amsmath,amssymb,graphicx,bibentry,bbm,babel,ragged2e}
+
+\makeatletter
+
+\newcommand{\noun}[1]{\textsc{#1}}
+\newcommand{\jitem}[1]{\item \begin{justify} #1 \end{justify} \vfill{}}
+\newcommand{\sframe}[2]{\frame{\frametitle{#1} #2}}
+
+\newenvironment{centercolumns}{\begin{columns}[c]}{\end{columns}}
+%\newenvironment{jitem}{\begin{justify}\begin{itemize}}{\end{itemize}\end{justify}}
+
+\usetheme{Warsaw}
+\setbeamertemplate{footline}[text line]{}
+\setbeamercolor{structure}{fg=purple!50!blue, bg=purple!50!blue}
+
+\setbeamersize{text margin left=15pt,text margin right=15pt}
+
+\setbeamercovered{transparent}
+
+
+\@ifundefined{showcaptionsetup}{}{%
+ \PassOptionsToPackage{caption=false}{subfig}}
+\usepackage{subfig}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+
+
+\makeatother
+
+\begin{document}
+
+
+\title{Investigating the Empirical Existence of Static User Equilibrium}
+
+\author{J.~Raimbault$^{1,2}$\\
+\texttt{juste.raimbault@iscpif.fr}
+}
+
+
+\institute{$^{1}$UPS CNRS 3611 ISC-PIF\\
+$^{2}$UMR CNRS 8504 G{\'e}ographie-cit{\'e}s\\
+}
+
+
+\date{Smart mobility master\\\smallskip
+\textit{Modeling Traffic and Transportation Networks}\\\smallskip
+%March 9th 2018
+October 12th 2018
+} 
+
+\frame{\maketitle}
+
+
+
+%%%%%%%%%%%%%%%%%
+\section{Introduction}
+%%%%%%%%%%%%%%%%%
+
+
+
+\sframe{What is congestion ?}{
+
+Negative externalities and conjunction of aggregation and dispersion forces in territorial systems \cite{fujita1996economics}. 
+
+\bigskip
+
+$\rightarrow$ \textit{Congestion is when the volume of use exceeds the infrastructure/system capacity}
+
+\bigskip
+
+\textbf{Examples: } traffic congestion, pedestrian congestion, public transport congestion, real estate market congestion, logistic supply congestion, etc.
+
+}
+
+\sframe{Congestion in territorial systems}{
+
+\justify
+
+
+\vspace{-0.5cm}
+Crucial role in the evolution of an urban system, at several scales: example of the land-use/transport feedback cycle from \cite{wegener2004land}
+
+\centering
+
+\includegraphics[width=0.7\textwidth]{figures/wegener.png}
+
+}
+
+\sframe{Measures for the congestion of traffic}{
+
+% theorey on congestion : free flows, bpr, fundamental diagram of traffic
+
+Various approaches to measure traffic congestion \cite{rao2012measuring} :
+
+\begin{itemize}
+	\item current average speed
+	\item travel time and delay (associated accessibility indices)
+	\item volumes of vehicles
+	\item level of service
+	\item capacity of the network to answer demand
+	\item generalized costs increase
+\end{itemize}
+
+
+}
+
+
+
+\sframe{Fundamental diagram of traffic}{
+
+Fundamental relation between vehicle density and flow : free flow, critical phase, congested phase.
+
+\bigskip
+
+\textit{Theoretical and empirical example from \cite{daganzo2008analytical}}
+
+\medskip
+
+\includegraphics[width=0.48\textwidth]{figures/funddiagth.png}
+\includegraphics[width=0.48\textwidth]{figures/funddiagemp.png}
+
+}
+
+
+
+\sframe{Traffic phase diagram}{
+
+Example of theoretical and empirical phases in a ramp configuration \cite{treiber2010three}
+
+\medskip
+
+\includegraphics[width=\textwidth]{figures/trafficphases.png}
+
+}
+
+
+
+
+\sframe{Traffic Modeling : User Equilibrium Frameworks}{
+
+\justify
+
+% from static user eq to recent theoretical framework
+
+\textbf{Transportation network model: } graph with edges flows and capacity.
+
+\medskip
+
+\textbf{Question: } How to compute traffic flows from a demand pattern ?
+
+$\rightarrow$ \textit{Traffic assignment problem}
+
+\medskip
+
+\begin{enumerate}
+	\item Basic solution: shortest path assignment (betweenness centrality)
+	\item More elaborate: user equilibrium at which no user can improve his travel time, coined by \cite{wardrop1952road} (game theory approach: similar to a Nash equilibrium)
+	\begin{itemize}
+		\item mathematical existence generally verified (fixed point theorem), unicity more difficult
+		\item temporal stationarity assumption: flows are assumed to converge on the considered period, generally rush hour
+	\end{itemize}
+\end{enumerate}
+
+%\textit{Equilibrium frameworks central in Transportation Research since Wardrop }
+
+
+
+%%%%%%%%%
+% detail assumptions of Wardrop
+%  - game theory
+%  - mathematical existence
+%  - interpretation
+%  - stationarity of flows / rush hours
+
+
+
+}
+
+
+
+
+\sframe{Extensions of Wardrop's equilibrium}{
+
+\bigskip
+
+\textbf{Diverse developments of the SUE:}
+
+\medskip
+
+$\rightarrow$ Dynamic Stochastic User Equilibrium~\cite{han2003dynamic}
+
+\medskip
+
+$\rightarrow$ Restricted Stochastic User Equilibrium~\cite{rasmussen2015stochastic} more realistic in alternatives
+
+\medskip
+
+$\rightarrow$ Boundedly User Equilibrium~\cite{mahmassani1987boundedly}
+
+\medskip
+
+$\rightarrow$ Assignment techniques inspired from other fields such as Network Science~\cite{puzis2013augmented}
+
+}
+
+
+\sframe{Validation and Practical Use}{
+
+\justify
+% 
+
+\textit{Static User Equilibrium lacks empirical validation in the literature}
+
+\medskip
+
+$\rightarrow$ Some examples such as the behavioral study of user route choices (``Wardrop's first principle'') in \cite{zhu2010people}
+
+\bigskip
+
+
+\textbf{However still largely used}
+
+\medskip
+
+$\rightarrow$ in theoretical literature, as for example \cite{leurent2014user} : do refinements in the model such as adding parking cruising flows have a sense if the core is not validated ?
+
+\medskip
+
+$\rightarrow$ in real-world application, such as the MODUS model for Paris Metropolitan area : what are the implications of basing decision-making and traffic management on an unvalidated framework ?
+
+
+}
+
+
+
+
+
+
+
+\sframe{Empirical Investigation of SUE Existence}{
+
+\justify
+
+\textbf{Research Objective : } \textit{Investigate empirically the spatio-temporal stationarity of traffic flows, combining different complementary quantitative approaches}
+
+\bigskip
+
+$\rightarrow$ Construction of a real-time dataset for major links of Paris region on 6 month by data crawling
+
+\medskip
+
+$\rightarrow$ Complementarity of approaches (Complex Systems general paradigm) : Spatio-temporal data visualization, Network analysis, Spatial analysis
+
+}
+
+
+%%%%%%%%%%%%%%%%%
+\section{Methods and Results}
+%%%%%%%%%%%%%%%%%
+
+
+\sframe{Data collection: illustration}{
+\textit{Crawling of semi-open data may be necessary to study territorial systems}
+
+\bigskip
+
+
+\textbf{Mobility data:} status of VLib stations in real time (easy: API)
+
+\cite{raimbault2015user}
+
+\bigskip
+
+\centering
+\includegraphics[width=0.7\textwidth]{figures/velib}
+
+
+
+}
+
+
+
+\sframe{Data collection}{
+
+More difficult mobility data: dockless bike sharing. Evaluation of an ad-hoc algorithm.
+
+\medskip
+
+\centering
+
+\includegraphics[width=0.48\textwidth]{figures/gobee_buffer.png}\includegraphics[width=0.48\textwidth]{figures/gobee_resol.png}
+
+
+}
+
+\sframe{Data collection}{
+Even more difficult: ad-hoc algorithm and large scale data (150000 records every 12 hours). Example of US gaz prices.
+
+\medskip
+
+\centering
+
+\includegraphics[width=0.8\textwidth]{figures/average_regular_map.png}
+
+}
+
+
+\sframe{Data collection}{
+
+\textit{Not only for spatial data}
+
+\medskip
+
+\textbf{Paper citation data}: example of a journal not referenced by classical databases. Reconstruction of citation networks.
+%Crawling of \texttt{google scholar} by using the option ``\textit{cited by}'' 
+
+\bigskip
+
+%$\rightarrow$ \textit{crawling} de \texttt{google scholar} par utilisation de l'option ``\textit{cit{\'e} par}'' \cite{noruzi2005google}
+
+
+\centering
+
+\includegraphics[width=0.7\textwidth]{figures/exCrawling}
+
+}
+
+
+
+
+
+
+
+\sframe{Dataset Construction}{
+
+\textit{Difficulty to find Open Data on Transportation Systems \cite{bouteiller2013open}}
+
+
+$\rightarrow$ Construction of an open historical travel time dataset for major links in the region of Paris, collecting in real time public traffic data from \texttt{www.sytadin.fr}
+
+\medskip
+
+\textbf{Data collection : } Each two minutes, automated python script
+
+\begin{itemize}
+\item fetch raw webpage giving traffic information
+\item parse html code
+\item store in a \texttt{sqlite} database
+\end{itemize}
+
+\textit{Openly available (CC Licence) at }\url{http://dx.doi.org/10.7910/DVN/X22ODA}
+
+\medskip
+
+\textbf{Data summary: } more than 2 years (since Feb. 2016), 2min time granularity, effective travel time for 101 links ($\simeq$ 10km spatial granularity)
+
+
+}
+
+
+
+\sframe{Interactive Data Visualization}{
+
+\textit{Interactive web-application for spatio-temporal exploration}
+
+\texttt{http://shiny.parisgeo.cnrs.fr/transportation}
+
+\bigskip
+
+\centering
+
+\includegraphics[width=0.9\textwidth]{figures/gr1}
+
+\smallskip
+
+\footnotesize\textit{Demonstration of the interactive application}
+
+}
+
+
+\sframe{Temporal patterns of congestion}{
+
+
+\includegraphics[width=\textwidth]{figures/congestion.png}
+
+}
+
+
+\sframe{Summary statistics}{
+
+\textit{Distribution of relative times}
+
+\medskip
+\centering
+
+\includegraphics[width=0.85\textwidth]{figures/reltime.png}
+
+}
+
+
+\sframe{Summary statistics}{
+
+\textit{Rank size law for relative times: signature of a complex system with extreme events}
+\centering
+\medskip
+
+\includegraphics[width=0.85\textwidth]{figures/reltime_ranksize.png}
+
+}
+
+\sframe{Summary statistics}{
+
+\textit{Distribution of relative times by link: identification of critical links}
+
+\medskip
+\centering
+
+\includegraphics[width=0.9\textwidth]{figures/reltime_bylink.png}
+
+
+}
+
+
+\sframe{Spatio-temporal Variability : Example}{
+
+\textit{Very high spatial variability on 10min time interval, here on 11/02/2016 00:06-00:16}
+
+\bigskip
+
+\includegraphics[width=0.48\textwidth]{figures/gr21}\hfill
+\includegraphics[width=0.48\textwidth]{figures/gr22}
+
+}
+
+
+\sframe{Spatio-temporal Variability}{
+
+\textit{Maximal travel time and spatial variabilities on a two week sample}
+
+\bigskip
+
+\includegraphics[width=0.5\textwidth,height=0.6\textheight]{figures/gr31}
+\includegraphics[width=0.5\textwidth,height=0.6\textheight]{figures/gr32}
+
+}
+
+
+
+\sframe{Stability of Network Measures}{
+
+Network Betweenness Centrality 
+
+\begin{equation}
+b_i = \frac{1}{N(N-1)}\cdot \sum_{o\neq d \in V}\mathbbm{1}_{i\in p(o\rightarrow d)}
+\end{equation}
+
+Temporal Maximal Betweenness Variability
+
+\begin{equation}
+\Delta b(t) = \frac{\left|\max_i (b_i(t + \Delta t)) - \max_i (b_i(t))\right|}{\max_i (b_i(t))}
+\end{equation}
+
+\bigskip
+
+$\rightarrow$ \textit{Reveals either a proportion of rerouted travels (negative variation) or a minimal proportion of load increase for a single node (positive variation)}
+
+}
+
+
+\sframe{Stability of Network Measures}{
+
+\textit{Temporal maximal betweenness variability on a two weeks period}
+
+\medskip
+
+\centering 
+
+\includegraphics[width=0.9\textwidth]{figures/gr4}
+}
+
+
+
+\sframe{Spatial Heterogeneity}{
+
+Spatial Autocorrelation as an index of spatial variability, for link $i$
+
+\begin{equation}
+\rho_i = \frac{1}{K}\cdot \sum_{i\neq j}{w_{ij}\cdot (c_i - \bar{c})(c_j - \bar{c})}
+\end{equation}
+
+with spatial weights  $w_{ij} = \exp{\left(\frac{-d_{ij}}{d_0}\right)}$
+
+\bigskip
+\bigskip
+
+$\rightarrow$ \textit{Indirect measure of the spatial stationarity of flows : a decreasing correlation implies a chaotic system}
+
+
+}
+
+
+
+\sframe{Spatial Heterogeneity}{
+
+\textit{Spatial autocorrelation on a two weeks period for different decays}
+
+\medskip
+
+\centering
+
+\includegraphics[width=\textwidth,height=0.8\textheight]{figures/moran_withCong}
+
+}
+
+
+%%%%%%%%%%%%%%%%%
+\section{Discussion}
+%%%%%%%%%%%%%%%%%
+
+
+\sframe{Theoretical and Practical Implications}{
+
+\justify
+
+\textbf{Theoretical Implications}
+
+\medskip
+
+$\rightarrow$ Need for more systematic comparison of framework validity
+
+(\cite{kryvobokov2013comparison} compares two LUTI models e.g.)
+
+\medskip
+
+$\rightarrow$ Can still be used e.g. for integration within more complex models
+
+\bigskip
+\bigskip
+
+\textbf{Practical Implications}
+
+\medskip
+
+$\rightarrow$ Difficulty of transferring academic results to real-world engineering, that can be tied to habits, myths, political interests, etc.~\cite{commenges2013invention} ; \cite{offner1993effets}
+
+
+}
+
+
+
+%\sframe{Explanative Interpretations}{
+
+% - not really interesting -
+
+%}
+
+%
+%\sframe{Possible Developments}{
+%\justify
+%\textbf{1. Further assessment of chaotic nature of traffic flows}
+%\medskip
+%$\rightarrow$ Study of spatio-temporal properties of Liapounov exponents
+%\cite{goldhirsch1987stability}, recently used in transportation research
+%\cite{tordeux2016jam}
+%\medskip
+%$\rightarrow$ Additional features for spatio-temporal data exploration : Kernel smoothing for wave visualization, localized plots, etc.
+%\bigskip
+%\textbf{2. Systematization of empirical assessment ; generic benchmarks for frameworks/model}
+%\medskip
+%$\rightarrow$ Similar use of a web-application for users to crowd-source their model/data as e.g. \cite{2016arXiv160606162C}
+%}
+
+
+
+\sframe{Conclusion}{
+
+\justify
+
+$\rightarrow$ Simple but necessary empirical insights into SUE spatio-temporal stationarity
+
+\medskip
+
+$\rightarrow$ Construction of an open dataset : need for more openness, transparency, reproducibility
+
+\medskip
+
+$\rightarrow$ Strong need for more integrated research : theoretical-empirical, between disciplines, between approaches and objectives, between models (multi-modeling) \cite{raimbault:tel-01857741}
+
+
+\bigskip
+
+
+\footnotesize{ - All code available at \\\url{https://github.com/JusteRaimbault/TransportationEquilibrium}
+
+ - Interactive web application \url{http://shiny.parisgeo.cnrs.fr/transportation}
+
+ - Latest version of the dataset available at \url{http://dx.doi.org/10.7910/DVN/X22ODA}
+
+ - Paper: \cite{raimbault2017investigating}, open version available at \url{http://arxiv.org/abs/1608.05266}
+}
+
+}
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[allowframebreaks]
+\frametitle{References}
+\bibliographystyle{apalike}
+\bibliography{/Users/juste/ComplexSystems/CityNetwork/Biblio/Bibtex/CityNetwork,/Users/juste/ComplexSystems/CityNetwork/Biblio/Bibtex/selfcit,biblio}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
+
+
+
+
+
+
+

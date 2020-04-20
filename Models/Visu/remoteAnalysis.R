@@ -108,15 +108,42 @@ for(ii in 1:length(indexes)){
 }
 
 imax = which(maxalltimes==max(maxalltimes))[1]
+ismax = which(maxdet==max(maxdet))[1]
 maxtime[imax]
-indexes[imax]
-gg=constructGraph(data,roads,times,times[indexes[imax]])
-ggprev=constructGraph(data,roads,times,times[indexes[imax-1]])
-shortest_paths(gg,from=V(gg)[20],to=V(gg)[25],output="both",weights = E(gg)$traveltime)
-shortest_paths(ggprev,from=V(ggprev)[20],to=V(ggprev)[25],output="both",weights = E(ggprev)$traveltime)
+indexes[ismax]
+maxdet[ismax]
 
-distances(ggprev,weight=E(ggprev)$traveltime)[20,25]
-fulldistances[[indexes[imax]]]$timeDistances[20,25]
+gg=constructGraph(data,roads,times,times[indexes[ismax]])
+ggprev=constructGraph(data,roads,times,times[indexes[ismax-1]])
+ds = graphDistances(gg)$spaceDistances - graphDistances(ggprev)$spaceDistances
+dt = graphDistances(gg)$timeDistances - graphDistances(ggprev)$timeDistances
+which(abs(ds)==max(abs(ds))) / 43
+ds[3,7]
+dt[3,7]
+V(ggprev)[3]
+
+shortest_paths(gg,from=V(gg)[3],to=V(gg)[7],output="both",weights = E(gg)$traveltime)
+shortest_paths(ggprev,from=V(ggprev)[3],to=V(ggprev)[7],output="both",weights = E(ggprev)$traveltime)
+
+as.POSIXct(times[indexes[ismax-1]], origin="1970-01-01")
+
+# between ggprev : P.Auteuil  P.Maillot  P.Chapelle P.Bagnolet
+#   and gg : P.Auteuil         PontdeSÃ¨vres     LePetitClamart   
+# Fresnes           Vitry-sur-Seine   CrÃ©teilPompadour
+# Saint-Maurice     Nogent-sur-Marne  Rosny-sous-Bois  
+# P.Bagnolet 
+# -> a huge event should block Paris ring. - +37km detour
+# date : 11/02 between 00:06 and 00:16
+#  corresponding time variation : only 6min !
+
+
+
+#distances(ggprev,weight=E(ggprev)$traveltime)[20,25]
+#fulldistances[[indexes[imax]]]$timeDistances[20,25]
+
+
+###
+# variability plots
 
 plot((times[indexes]-times[indexes[1]])/3600,maxalltimes,type='l',xlab="time(h)",ylab="max temporal var (min)",ylim=c(0,30))
 
@@ -128,4 +155,11 @@ g+geom_line(aes(dates,maxalltimes),colour="lightskyblue3")+stat_smooth(method="l
 
 
 plot(maxdet,type='l')
+
+
+## spatial deviation
+# Janvry : 8 ; Roissy : 35
+plot(unlist(lapply(fulldistances[indexes],function(l){l$spaceDistances[8,35]})),type='l')
+
+
 
