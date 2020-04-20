@@ -16,4 +16,5 @@ def setup_gmaps():
     conn.commit()
     conn.close()
 
-setup_gmaps()
+#setup_gmaps()
+setup_sytadin()
